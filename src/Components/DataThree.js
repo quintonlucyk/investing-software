@@ -1,6 +1,6 @@
 import React from 'react';
 
-class DataTwo extends React.Component {
+class DataThree extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,10 +11,8 @@ class DataTwo extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://cloud-sse.iexapis.com/stable/stocksUS?token=pk_4d65f48c062e4b32addd9bb185f608a6&symbols=${this.props.symbol}`)
-            //https://cloud.iexapis.com/stable/stock/${this.props.symbol}/quote?token=pk_4d65f48c062e4b32addd9bb185f608a6
-            //https://cloud-sse.iexapis.com/stable/stocksUS?token=YOUR_TOKEN&symbols=spy
-            //pk_4d65f48c062e4b32addd9bb185f608a6
+        console.log(this.props.symbol);
+        fetch(`https://api-v2.intrinio.com/companies/${this.props.symbol}?api_key=OmQxOTk5MGUxYzIyNzhjOTZlMjdhZTBlNmJiMWI4MDY2`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -45,4 +43,4 @@ class DataTwo extends React.Component {
     }
 }
 
-export default DataTwo;
+export default DataThree;

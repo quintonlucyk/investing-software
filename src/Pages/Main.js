@@ -1,6 +1,7 @@
 import React from 'react';
 import Data from '../Components/Data';
 import DataTwo from '../Components/DataTwo';
+import DataThree from '../Components/DataThree';
 
 class Main extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Main extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState({ searchedSymbol: this.symbolRef.current.value });
+        this.setState({ searchedSymbol: this.symbolRef.current.value.toUpperCase() });
     };
 
     render() {
@@ -30,7 +31,8 @@ class Main extends React.Component {
                 </div>
                 {this.state.searchedSymbol && (
                     // <Data symbol={this.state.searchedSymbol} />
-                    <DataTwo symbol={this.state.searchedSymbol} />
+                    // <DataTwo symbol={this.state.searchedSymbol} />
+                    <DataThree symbol={this.state.searchedSymbol} />
                 )}
             </div>
         );
