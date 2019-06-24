@@ -1,5 +1,6 @@
 import React from 'react';
 import Data from '../Components/Data';
+import DataTwo from '../Components/DataTwo';
 
 class Main extends React.Component {
     constructor(props) {
@@ -28,7 +29,8 @@ class Main extends React.Component {
                     </div>
                 </div>
                 {this.state.searchedSymbol && (
-                    <Data symbol={this.state.searchedSymbol} />
+                    // <Data symbol={this.state.searchedSymbol} />
+                    <DataTwo symbol={this.state.searchedSymbol} />
                 )}
             </div>
         );

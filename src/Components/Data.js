@@ -11,7 +11,7 @@ class Data extends React.Component {
         };
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${this.props.symbol}&interval=5min&apikey=DG61VKY2XF1OVBWJ`)
             .then(res => res.json())
             .then(
