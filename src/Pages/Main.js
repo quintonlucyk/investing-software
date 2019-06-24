@@ -30,9 +30,9 @@ class Main extends React.Component {
                     </div>
                 </div>
                 {this.state.searchedSymbol && (
-                    // <Data symbol={this.state.searchedSymbol} />
+                    <Data symbol={this.state.searchedSymbol} />
                     // <DataTwo symbol={this.state.searchedSymbol} />
-                    <DataThree symbol={this.state.searchedSymbol} />
+                    // <DataThree symbol={this.state.searchedSymbol} />
                 )}
             </div>
         );
