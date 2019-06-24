@@ -1,36 +1,35 @@
 import React from 'react';
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import Data from '../Components/Data';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            searchedSymbol: ""
+        }
+        this.symbolRef = React.createRef();
     }
 
-    componentDidMount() {
-
-    }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.setState({ searchedSymbol: this.symbolRef.current.value });
+    };
 
     render() {
         return (
             <div className="App container" >
                 <div className="row justify-content-center m-4">
                     <div className="col-6">
-                        <InputGroup >
-                            <FormControl
-                                placeholder="Symbol"
-                                aria-label="Symbol"
-                                id="symbol-search"
-                            />
-                            <InputGroup.Append>
-                                <Button >Search</Button>
-                            </InputGroup.Append>
-                        </InputGroup>
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" ref={this.symbolRef} placeholder="Enter symbol here" />
+                            <input type="submit" value="Submit" />
+                        </form>
                     </div>
                 </div>
-                <div className="row">
-                    <Data symbol={this.symbol} />
-                </div>
+                {this.state.searchedSymbol && (
+                    <Data symbol={this.state.searchedSymbol} />
+                )}
             </div>
         );
     }

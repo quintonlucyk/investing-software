@@ -1,4 +1,5 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class Data extends React.Component {
     constructor(props) {
@@ -10,8 +11,8 @@ class Data extends React.Component {
         };
     }
 
-    componentDidMount() {
-        fetch("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=DG61VKY2XF1OVBWJ")
+    componentDidUpdate() {
+        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${this.props.symbol}&interval=5min&apikey=DG61VKY2XF1OVBWJ`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -38,18 +39,24 @@ class Data extends React.Component {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
-        } else {
+        } else if (items["Meta Data"]) {
             return (
-                <ul>
-                    {console.log(items["Meta Data"])}
-                    <li>{`1. Information: ${items["Meta Data"][["1. Information"]]}`}</li>
-                    <li>{`2. Symbol: ${items["Meta Data"][["2. Symbol"]]}`}</li>
-                    <li>{`3. Last Refreshed: ${items["Meta Data"][["3. Last Refreshed"]]}`}</li>
-                    <li>{`4. Interval: ${items["Meta Data"][["4. Interval"]]}`}</li>
-                    <li>{`5. Output Size: ${items["Meta Data"][["5. Output Size"]]}`}</li>
-                    <li>{`6. Time Zone: ${items["Meta Data"][["6. Time Zone"]]}`}</li>
-                </ul>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>{`1. Information: ${items["Meta Data"][["1. Information"]]}`}</ListGroup.Item>
+                    <ListGroup.Item>{`2. Symbol: ${items["Meta Data"][["2. Symbol"]]}`}</ListGroup.Item>
+                    <ListGroup.Item>{`3. Last Refreshed: ${items["Meta Data"][["3. Last Refreshed"]]}`}</ListGroup.Item>
+                    <ListGroup.Item>{`4. Interval: ${items["Meta Data"][["4. Interval"]]}`}</ListGroup.Item>
+                    <ListGroup.Item>{`5. Output Size: ${items["Meta Data"][["5. Output Size"]]}`}</ListGroup.Item>
+                </ListGroup>
             );
+        } else if (items["Error Message"]) {
+            return (
+                <ListGroup>
+                    <ListGroup.Item variant="danger">No Luck for That Symbol</ListGroup.Item>
+                </ListGroup>
+            );
+        } else {
+            return null;
         }
     }
 }
