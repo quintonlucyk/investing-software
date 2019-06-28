@@ -1,39 +1,45 @@
 import React from 'react';
-import Data from '../Components/Data';
-import DataTwo from '../Components/DataTwo';
-import DataThree from '../Components/DataThree';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import DisplayStockData from '../Components/DisplayStockData';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            searchedSymbol: ""
-        }
         this.symbolRef = React.createRef();
+        this.state = {
+            result: null
+        }
     }
 
-    handleSubmit = (event) => {
+    search = async (event) => {
         event.preventDefault();
-        this.setState({ searchedSymbol: this.symbolRef.current.value.toUpperCase() });
-    };
+        const symbol = this.symbolRef.current.value.toUpperCase();
+        try {
+            const res = await fetch(`https://financialmodelingprep.com/api/v3/company/profile/${symbol}`);
+            this.setState({result: await res.json()});
+        } catch (error) {
+            this.setState({result: {error: error}})
+        }
+    }
 
     render() {
         return (
             <div className="App container" >
                 <div className="row justify-content-center m-4">
-                    <div className="col-6">
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" ref={this.symbolRef} placeholder="Enter symbol here" />
-                            <input type="submit" value="Submit" />
-                        </form>
-                    </div>
+                        <Form inline onSubmit={this.search}>
+                            <Form.Group>
+                                <Form.Label className="m-2">Stock Symbol </Form.Label>
+                                <Form.Control className="m-2" type="text" ref={this.symbolRef} placeholder="Enter symbol" />
+                            </Form.Group>
+                            <Button variant="primary" className="m-2" type="submit">
+                                Submit
+                            </Button>
+                        </Form>
                 </div>
-                {this.state.searchedSymbol && (
-                    <Data symbol={this.state.searchedSymbol} />
-                    // <DataTwo symbol={this.state.searchedSymbol} />
-                    // <DataThree symbol={this.state.searchedSymbol} />
-                )}
+                <div className="row justify-content-center m-4">
+                    <DisplayStockData data={this.state.result} />
+                </div>
             </div>
         );
     }
