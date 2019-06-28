@@ -15,7 +15,14 @@ class DisplayStockData extends React.Component {
             );
         } else {
             return (
+                <React.Fragment>
                 <p>Success on the call!</p>
+                <ul>
+                    <li>Symbol: {this.props.data.symbol}</li>
+                    {/* <li>Profile: {this.props.data.profile}</li> */}
+                </ul>
+                
+                </React.Fragment>
             );
         }
     }
