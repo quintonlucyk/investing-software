@@ -1,14 +1,19 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import {
+  Form,
+  Button,
+  ButtonToolbar,
+  OverlayTrigger,
+  Popover
+} from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayMetricsData from "../Components/DisplayMetricsData";
 import { profileCall, metricsCall } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSpinner);
+library.add(faSpinner, faQuestionCircle);
 
 class Main extends React.Component {
   constructor(props) {
@@ -55,6 +60,18 @@ class Main extends React.Component {
             <Button variant="primary" className="m-2" type="submit">
               Submit
             </Button>
+            <ButtonToolbar className="m-2">
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Popover id="popover-basic" title="What is this all about?">
+                    Easier company evaluation
+                  </Popover>
+                }
+              >
+                <FontAwesomeIcon icon="question-circle" />
+              </OverlayTrigger>
+            </ButtonToolbar>
           </Form>
         </div>
         <div className="row justify-content-center m-4">

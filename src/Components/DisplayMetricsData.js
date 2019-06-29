@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
+import { Table, ButtonToolbar, OverlayTrigger, Popover } from "react-bootstrap";
 
 class DisplayMetricsData extends React.Component {
   render() {
@@ -56,7 +56,24 @@ class DisplayMetricsData extends React.Component {
           </thead>
           <tbody>
             <tr>
-              <td>ROIC</td>
+              <td>
+                ROIC{" "}
+                <ButtonToolbar className="m-2">
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={
+                      <Popover
+                        id="popover-basic"
+                        title="What is this all about?"
+                      >
+                        Easier company evaluation
+                      </Popover>
+                    }
+                  >
+                    <FontAwesomeIcon icon="question-circle" />
+                  </OverlayTrigger>
+                </ButtonToolbar>
+              </td>
               <td>{oneYearRoic}</td>
               <td>{fiveYearRoic}</td>
               <td>{tenYearRoic}</td>
