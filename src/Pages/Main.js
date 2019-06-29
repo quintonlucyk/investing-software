@@ -7,7 +7,7 @@ import {
   Popover
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
-import DisplayMetricsData from "../Components/DisplayMetricsData";
+import DisplayTableData from "../Components/DisplayTableData";
 import { profileCall, metricsCall } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -61,7 +61,7 @@ class Main extends React.Component {
                 placement="right"
                 overlay={
                   <Popover id="popover-basic" title="What is this all about?">
-                    Making the world a better place, always.
+                    Making the world a better place, always.<span role="img" aria-label="Smiley face">😊</span>
                   </Popover>
                 }
               >
@@ -75,7 +75,7 @@ class Main extends React.Component {
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
           <DisplayProfileData profile={this.state.profile} />
-          <DisplayMetricsData metrics={this.state.metrics} />
+          <DisplayTableData metrics={this.state.metrics} />
         </div>
       </div>
     );

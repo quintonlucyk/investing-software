@@ -28,6 +28,11 @@ class DisplayMetricsData extends React.Component {
             break;
           }
         } else {
+          if (i < 1) {
+            oneYearRoic = "NA";
+            tenYearRoic = "NA";
+            fiveYearRoic = "NA";
+          }
           if (i < 5) {
             tenYearRoic = "NA";
             fiveYearRoic = "NA";
