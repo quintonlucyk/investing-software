@@ -6,6 +6,7 @@ class DisplayMetricsData extends React.Component {
     if (this.props.metrics == null) {
       return null;
     } else if (this.props.metrics.Error === undefined) {
+      console.log(this.props.metrics);
       let tenYearRoic = 0;
       let fiveYearRoic = 0;
       let oneYearRoic = 0;
