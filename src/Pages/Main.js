@@ -1,26 +1,42 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import DisplayStockData from '../Components/DisplayStockData';
+import DisplayProfileData from '../Components/DisplayProfileData';
+import { profileCall, ratiosCall } from '../APICalls/FinancialModellingPrep';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faSpinner);
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
         this.symbolRef = React.createRef();
         this.state = {
-            result: null
+            loading: false,
+            profile: null,
+            ratios: null,
         }
     }
 
     search = async (event) => {
         event.preventDefault();
         const symbol = this.symbolRef.current.value.toUpperCase();
-        try {
-            const res = await fetch(`https://financialmodelingprep.com/api/v3/company/profile/${symbol}`);
-            this.setState({result: await res.json()});
-        } catch (error) {
-            this.setState({result: {error: error}})
-        }
+        this.setState({
+            loading: true,
+            profile: null,
+            ratios: null,
+        });
+        const profile = await profileCall(symbol);
+        const ratios = await ratiosCall(symbol);
+        console.log('profile', profile);
+        console.log('ratios', ratios);
+        this.setState({
+            loading: false,
+            profile: profile,
+            ratios: ratios
+        });
     }
 
     render() {
@@ -38,7 +54,10 @@ class Main extends React.Component {
                         </Form>
                 </div>
                 <div className="row justify-content-center m-4">
-                    <DisplayStockData data={this.state.result} />
+                    {this.state.loading && (
+                        <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
+                    )}
+                    <DisplayProfileData profile={this.state.profile} />
                 </div>
             </div>
         );
