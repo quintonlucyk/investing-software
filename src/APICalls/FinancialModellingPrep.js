@@ -10,10 +10,10 @@ export const profileCall = async symbol => {
   }
 };
 
-export const ratiosCall = async symbol => {
+export const metricsCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financial-ratios/${symbol}`
+      `https://financialmodelingprep.com/api/v3/company-key-metrics/${symbol}`
     );
     const json = await res.json();
     return json;

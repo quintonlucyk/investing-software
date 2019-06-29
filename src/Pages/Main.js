@@ -2,8 +2,8 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayProfileData from "../Components/DisplayProfileData";
-import DisplayRatiosData from "../Components/DisplayRatiosData";
-import { profileCall, ratiosCall } from "../APICalls/FinancialModellingPrep";
+import DisplayMetricsData from "../Components/DisplayMetricsData";
+import { profileCall, metricsCall } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ class Main extends React.Component {
     this.state = {
       loading: false,
       profile: null,
-      ratios: null
+      metrics: null
     };
   }
 
@@ -27,16 +27,14 @@ class Main extends React.Component {
     this.setState({
       loading: true,
       profile: null,
-      ratios: null
+      metrics: null
     });
     const profile = await profileCall(symbol);
-    const ratios = await ratiosCall(symbol);
-    console.log("profile", profile);
-    console.log("ratios", ratios);
+    const metrics = await metricsCall(symbol);
     this.setState({
       loading: false,
       profile: profile,
-      ratios: ratios
+      metrics: metrics
     });
   };
 
@@ -64,7 +62,7 @@ class Main extends React.Component {
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
           <DisplayProfileData profile={this.state.profile} />
-          <DisplayRatiosData ratios={this.state.ratios} />
+          <DisplayMetricsData metrics={this.state.metrics} />
         </div>
       </div>
     );
