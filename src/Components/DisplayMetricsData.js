@@ -1,5 +1,6 @@
 import React from "react";
-import { Table, ButtonToolbar, OverlayTrigger, Popover } from "react-bootstrap";
+import { Table, ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DisplayMetricsData extends React.Component {
   render() {
@@ -57,18 +58,11 @@ class DisplayMetricsData extends React.Component {
           <tbody>
             <tr>
               <td>
-                ROIC{" "}
-                <ButtonToolbar className="m-2">
+                ROIC
+                <ButtonToolbar className="m-2 d-inline">
                   <OverlayTrigger
                     placement="right"
-                    overlay={
-                      <Popover
-                        id="popover-basic"
-                        title="What is this all about?"
-                      >
-                        Easier company evaluation
-                      </Popover>
-                    }
+                    overlay={<Tooltip>(Return on Invested Capital)</Tooltip>}
                   >
                     <FontAwesomeIcon icon="question-circle" />
                   </OverlayTrigger>

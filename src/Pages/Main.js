@@ -10,10 +10,6 @@ import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayMetricsData from "../Components/DisplayMetricsData";
 import { profileCall, metricsCall } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSpinner, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faSpinner, faQuestionCircle);
 
 class Main extends React.Component {
   constructor(props) {
@@ -65,7 +61,7 @@ class Main extends React.Component {
                 placement="right"
                 overlay={
                   <Popover id="popover-basic" title="What is this all about?">
-                    Easier company evaluation
+                    Making the world a better place, always.
                   </Popover>
                 }
               >
