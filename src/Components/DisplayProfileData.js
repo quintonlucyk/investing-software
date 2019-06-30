@@ -14,7 +14,6 @@ class DisplayProfileData extends React.Component {
         </React.Fragment>
       );
     } else {
-      console.log(this.props.profile);
       return (
         <React.Fragment>
           <ul>

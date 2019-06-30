@@ -1,12 +1,5 @@
 import React from "react";
-import { Table } from "react-bootstrap";
-import DisplayROICRow from "./SubComponents/DisplayROICRow";
-import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
-import DisplayEPSRow from "./SubComponents/DisplayEPSRow";
-import DisplayRevenueRow from "./SubComponents/DisplayRevenueRow";
-import DisplayFreeCashRow from "./SubComponents/DisplayFreeCashRow";
-import DisplayOperatingCashRow from "./SubComponents/DisplayOperatingCashRow";
-import DisplayPERow from "./SubComponents/DisplayPERow";
+import Alert from "react-bootstrap/Alert";
 
 class DisplayRecommendation extends React.Component {
   render() {
@@ -16,15 +9,33 @@ class DisplayRecommendation extends React.Component {
       this.props.metrics.Error === undefined &&
       this.props.balance.Error === undefined &&
       this.props.income.Error === undefined &&
-      this.props.cash.Error === undefined
+      this.props.cash.Error === undefined &&
+      this.props.metrics.metrics[0]["Graham Number"] !== ""
     ) {
+      console.log(this.props.profile);
       console.log(this.props.metrics);
       console.log(this.props.balance);
       console.log(this.props.income);
       console.log(this.props.cash);
-      const EPS = 0;
-      return <p>calculating</p>;
+      const price = parseFloat(this.props.profile.profile.price);
+      const shouldPrice = parseFloat(
+        this.props.metrics.metrics[0]["Graham Number"]
+      );
+      if (price < shouldPrice) {
+        return (
+          <Alert variant="success">
+            Graham Number: ${Number.parseFloat(shouldPrice).toFixed(2)}
+          </Alert>
+        );
+      } else {
+        return (
+          <Alert variant="secondary">
+            Graham Number: ${Number.parseFloat(shouldPrice).toFixed(2)}
+          </Alert>
+        );
+      }
     } else {
+      console.log(this.props.profile);
       console.log(this.props.metrics);
       console.log(this.props.balance);
       console.log(this.props.income);

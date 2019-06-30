@@ -18,10 +18,6 @@ class DisplayTableData extends React.Component {
       this.props.income.Error === undefined &&
       this.props.cash.Error === undefined
     ) {
-      console.log(this.props.metrics);
-      console.log(this.props.balance);
-      console.log(this.props.income);
-      console.log(this.props.cash);
       return (
         <Table striped bordered hover>
           <thead>
