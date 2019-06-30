@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayTableData from "../Components/DisplayTableData";
+import DisplayRecommendation from "../Components/DisplayRecommendation";
 import {
   profileCall,
   metricsCall,
@@ -119,6 +120,13 @@ class Main extends React.Component {
           )}
           <DisplayProfileData profile={this.state.profile} />
           <DisplayTableData
+            metrics={this.state.metrics}
+            balance={this.state.balance}
+            income={this.state.income}
+            cash={this.state.cash}
+          />
+          <DisplayRecommendation
+            profile={this.state.profile}
             metrics={this.state.metrics}
             balance={this.state.balance}
             income={this.state.income}
