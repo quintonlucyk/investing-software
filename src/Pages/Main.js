@@ -12,7 +12,8 @@ import {
   profileCall,
   metricsCall,
   balanceCall,
-  incomeCall
+  incomeCall,
+  cashCall
 } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -21,35 +22,53 @@ class Main extends React.Component {
     super(props);
     this.symbolRef = React.createRef();
     this.state = {
+      error: false,
       loading: false,
       profile: null,
       metrics: null,
       balance: null,
-      income: null
+      income: null,
+      cash: null
     };
   }
 
   search = async event => {
     event.preventDefault();
-    const symbol = this.symbolRef.current.value.toUpperCase();
-    this.setState({
-      loading: true,
-      profile: null,
-      metrics: null,
-      balance: null,
-      income: null
-    });
-    const profile = await profileCall(symbol);
-    const metrics = await metricsCall(symbol);
-    const balance = await balanceCall(symbol);
-    const income = await incomeCall(symbol);
-    this.setState({
-      loading: false,
-      profile: profile,
-      metrics: metrics,
-      balance: balance,
-      income: income
-    });
+    if (this.symbolRef.current.value !== "") {
+      const symbol = this.symbolRef.current.value.toUpperCase();
+      this.setState({
+        error: false,
+        loading: true,
+        profile: null,
+        metrics: null,
+        balance: null,
+        income: null,
+        cash: null
+      });
+      const profile = await profileCall(symbol);
+      const metrics = await metricsCall(symbol);
+      const balance = await balanceCall(symbol);
+      const income = await incomeCall(symbol);
+      const cash = await cashCall(symbol);
+      this.setState({
+        loading: false,
+        profile: profile,
+        metrics: metrics,
+        balance: balance,
+        income: income,
+        cash: cash
+      });
+    } else {
+      this.setState({
+        error: true,
+        loading: false,
+        profile: null,
+        metrics: null,
+        balance: null,
+        income: null,
+        cash: null
+      });
+    }
   };
 
   render() {
@@ -87,6 +106,7 @@ class Main extends React.Component {
           </Form>
         </div>
         <div className="row justify-content-center m-4">
+          {this.state.error && <p>hmm</p>}
           {this.state.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
@@ -95,6 +115,7 @@ class Main extends React.Component {
             metrics={this.state.metrics}
             balance={this.state.balance}
             income={this.state.income}
+            cash={this.state.cash}
           />
         </div>
       </div>
