@@ -66,8 +66,7 @@ class DisplayPERow extends React.Component {
               placement="right"
               overlay={
                 <Tooltip>
-                  (Ratio of a company's share price to the company's earnings
-                  per share)
+                  (Ratio of the share price to the earnings per share)
                 </Tooltip>
               }
             >

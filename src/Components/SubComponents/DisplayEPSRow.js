@@ -75,7 +75,7 @@ class DisplayEPSRow extends React.Component {
           <ButtonToolbar className="m-2 d-inline">
             <OverlayTrigger
               placement="right"
-              overlay={<Tooltip>(Change in EPS)</Tooltip>}
+              overlay={<Tooltip>(Change in earnings per share)</Tooltip>}
             >
               <FontAwesomeIcon icon="question-circle" />
             </OverlayTrigger>

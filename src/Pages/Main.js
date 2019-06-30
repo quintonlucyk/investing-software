@@ -4,7 +4,8 @@ import {
   Button,
   ButtonToolbar,
   OverlayTrigger,
-  Popover
+  Popover,
+  Alert
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayTableData from "../Components/DisplayTableData";
@@ -77,7 +78,7 @@ class Main extends React.Component {
         <div className="row justify-content-center m-4">
           <Form inline onSubmit={this.search}>
             <Form.Group>
-              <Form.Label className="m-2">Quote Search</Form.Label>
+              <Form.Label className="m-2">Stock Symbol</Form.Label>
               <Form.Control
                 className="m-2"
                 type="text"
@@ -106,7 +107,13 @@ class Main extends React.Component {
           </Form>
         </div>
         <div className="row justify-content-center m-4">
-          {this.state.error && <p>hmm</p>}
+          {this.state.error && (
+            <Alert variant="danger">
+              <p className="m-0">
+                You need to enter a stock symbol to search for.
+              </p>
+            </Alert>
+          )}
           {this.state.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
