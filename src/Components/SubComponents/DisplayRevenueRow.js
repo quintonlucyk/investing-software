@@ -30,7 +30,7 @@ class DisplayRevenueRow extends React.Component {
         if (i < 1) {
           tenYearRevenue += float;
           fiveYearRevenue += float;
-          oneYearRevenue = Number.parseFloat(float).toFixed(2);
+          oneYearRevenue = Number.parseFloat(float).toFixed(2) + " %";
         } else if (i < 5) {
           tenYearRevenue += float;
           fiveYearRevenue += float;
@@ -56,11 +56,11 @@ class DisplayRevenueRow extends React.Component {
     tenYearRevenue =
       tenYearRevenue === "NA"
         ? "NA"
-        : Number.parseFloat(tenYearRevenue / 10).toFixed(2);
+        : Number.parseFloat(tenYearRevenue / 10).toFixed(2) + " %";
     fiveYearRevenue =
       fiveYearRevenue === "NA"
         ? "NA"
-        : Number.parseFloat(fiveYearRevenue / 5).toFixed(2);
+        : Number.parseFloat(fiveYearRevenue / 5).toFixed(2) + " %";
 
     return (
       <tr>

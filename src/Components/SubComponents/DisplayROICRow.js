@@ -29,7 +29,7 @@ class DisplayROICRow extends React.Component {
         if (i < 1) {
           tenYearRoic += float;
           fiveYearRoic += float;
-          oneYearRoic = Number.parseFloat(float).toFixed(2);
+          oneYearRoic = Number.parseFloat(float).toFixed(2) + " %";
         } else if (i < 5) {
           tenYearRoic += float;
           fiveYearRoic += float;
@@ -55,11 +55,11 @@ class DisplayROICRow extends React.Component {
     tenYearRoic =
       tenYearRoic === "NA"
         ? "NA"
-        : Number.parseFloat(tenYearRoic / 10).toFixed(2);
+        : Number.parseFloat(tenYearRoic / 10).toFixed(2) + " %";
     fiveYearRoic =
       fiveYearRoic === "NA"
         ? "NA"
-        : Number.parseFloat(fiveYearRoic / 5).toFixed(2);
+        : Number.parseFloat(fiveYearRoic / 5).toFixed(2) + " %";
 
     return (
       <tr>

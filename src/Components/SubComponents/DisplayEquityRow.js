@@ -40,7 +40,7 @@ class DisplayEquityRow extends React.Component {
         if (i < 1) {
           tenYearEquity += float;
           fiveYearEquity += float;
-          oneYearEquity = Number.parseFloat(float).toFixed(2);
+          oneYearEquity = Number.parseFloat(float).toFixed(2) + " %";
         } else if (i < 5) {
           tenYearEquity += float;
           fiveYearEquity += float;
@@ -66,11 +66,11 @@ class DisplayEquityRow extends React.Component {
     tenYearEquity =
       tenYearEquity === "NA"
         ? "NA"
-        : Number.parseFloat(tenYearEquity / 9).toFixed(2);
+        : Number.parseFloat(tenYearEquity / 9).toFixed(2) + " %";
     fiveYearEquity =
       fiveYearEquity === "NA"
         ? "NA"
-        : Number.parseFloat(fiveYearEquity / 5).toFixed(2);
+        : Number.parseFloat(fiveYearEquity / 5).toFixed(2) + " %";
 
     return (
       <tr>

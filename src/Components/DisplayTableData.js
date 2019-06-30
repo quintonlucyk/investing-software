@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import DisplayROICRow from "./SubComponents/DisplayROICRow";
 import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
+import DisplayEPSRow from "./SubComponents/DisplayEPSRow";
 import DisplayPERow from "./SubComponents/DisplayPERow";
 import DisplayRevenueRow from "./SubComponents/DisplayRevenueRow";
 
@@ -29,8 +30,9 @@ class DisplayTableData extends React.Component {
           <tbody>
             <DisplayROICRow metrics={this.props.metrics} />
             <DisplayEquityRow balance={this.props.balance} />
-            <DisplayPERow metrics={this.props.metrics} />
+            <DisplayEPSRow income={this.props.income} />
             <DisplayRevenueRow income={this.props.income} />
+            <DisplayPERow metrics={this.props.metrics} />
           </tbody>
         </Table>
       );
