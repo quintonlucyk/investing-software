@@ -11,7 +11,8 @@ import DisplayTableData from "../Components/DisplayTableData";
 import {
   profileCall,
   metricsCall,
-  balanceCall
+  balanceCall,
+  incomeCall
 } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -23,7 +24,8 @@ class Main extends React.Component {
       loading: false,
       profile: null,
       metrics: null,
-      balance: null
+      balance: null,
+      income: null
     };
   }
 
@@ -34,16 +36,19 @@ class Main extends React.Component {
       loading: true,
       profile: null,
       metrics: null,
-      balance: null
+      balance: null,
+      income: null
     });
     const profile = await profileCall(symbol);
     const metrics = await metricsCall(symbol);
     const balance = await balanceCall(symbol);
+    const income = await incomeCall(symbol);
     this.setState({
       loading: false,
       profile: profile,
       metrics: metrics,
-      balance: balance
+      balance: balance,
+      income: income
     });
   };
 
@@ -89,6 +94,7 @@ class Main extends React.Component {
           <DisplayTableData
             metrics={this.state.metrics}
             balance={this.state.balance}
+            income={this.state.income}
           />
         </div>
       </div>

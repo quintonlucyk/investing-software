@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import DisplayROICRow from "./SubComponents/DisplayROICRow";
 import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
 import DisplayPERow from "./SubComponents/DisplayPERow";
+import DisplayRevenueRow from "./SubComponents/DisplayRevenueRow";
 
 class DisplayTableData extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class DisplayTableData extends React.Component {
     ) {
       console.log(this.props.metrics);
       console.log(this.props.balance);
+      console.log(this.props.income);
       return (
         <Table striped bordered hover>
           <thead>
@@ -28,6 +30,7 @@ class DisplayTableData extends React.Component {
             <DisplayROICRow metrics={this.props.metrics} />
             <DisplayEquityRow balance={this.props.balance} />
             <DisplayPERow metrics={this.props.metrics} />
+            <DisplayRevenueRow income={this.props.income} />
           </tbody>
         </Table>
       );
