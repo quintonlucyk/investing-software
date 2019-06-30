@@ -21,6 +21,10 @@ class DisplayEquityRow extends React.Component {
           tenYearEquity = "NA";
         }
       } else if (
+        this.props.balance.financials[i] &&
+        this.props.balance.financials[i + 1] &&
+        this.props.balance.financials[i]["Total shareholders equity"] &&
+        this.props.balance.financials[i + 1]["Total shareholders equity"] &&
         this.props.balance.financials[i]["Total shareholders equity"] !== "" &&
         this.props.balance.financials[i + 1]["Total shareholders equity"] !== ""
       ) {

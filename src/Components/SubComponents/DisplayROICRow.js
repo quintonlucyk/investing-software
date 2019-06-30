@@ -9,7 +9,7 @@ class DisplayROICRow extends React.Component {
     let oneYearRoic = 0;
     let i = 0;
     for (let yearData of this.props.metrics.metrics) {
-      if (yearData.ROIC !== "") {
+      if (yearData && yearData.ROIC && yearData.ROIC !== "") {
         let float = parseFloat(yearData.ROIC) * 100;
         if (i < 1) {
           tenYearRoic += float;
