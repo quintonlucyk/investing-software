@@ -10,7 +10,9 @@ class DisplayRecommendation extends React.Component {
       this.props.balance.Error === undefined &&
       this.props.income.Error === undefined &&
       this.props.cash.Error === undefined &&
-      this.props.metrics.metrics[0]["Graham Number"] !== ""
+      this.props.metrics.metrics[0] &&
+      this.props.metrics.metrics[0]["Graham Number"] !== "" &&
+      this.props.metrics.metrics[0]["Graham Number"] !== "0.0"
     ) {
       console.log(this.props.profile);
       console.log(this.props.metrics);
