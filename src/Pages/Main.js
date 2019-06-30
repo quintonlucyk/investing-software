@@ -58,12 +58,12 @@ class Main extends React.Component {
         <div className="row justify-content-center m-4">
           <Form inline onSubmit={this.search}>
             <Form.Group>
-              <Form.Label className="m-2">Stock Symbol </Form.Label>
+              <Form.Label className="m-2">Quote Search</Form.Label>
               <Form.Control
                 className="m-2"
                 type="text"
                 ref={this.symbolRef}
-                placeholder="Enter symbol"
+                placeholder="(e.g. 'aapl')"
               />
             </Form.Group>
             <Button variant="primary" className="m-2" type="submit">
