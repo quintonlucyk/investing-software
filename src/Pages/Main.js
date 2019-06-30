@@ -8,7 +8,11 @@ import {
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayTableData from "../Components/DisplayTableData";
-import { profileCall, metricsCall } from "../APICalls/FinancialModellingPrep";
+import {
+  profileCall,
+  metricsCall,
+  balanceCall
+} from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Main extends React.Component {
@@ -18,7 +22,8 @@ class Main extends React.Component {
     this.state = {
       loading: false,
       profile: null,
-      metrics: null
+      metrics: null,
+      balance: null
     };
   }
 
@@ -28,14 +33,17 @@ class Main extends React.Component {
     this.setState({
       loading: true,
       profile: null,
-      metrics: null
+      metrics: null,
+      balance: null
     });
     const profile = await profileCall(symbol);
     const metrics = await metricsCall(symbol);
+    const balance = await balanceCall(symbol);
     this.setState({
       loading: false,
       profile: profile,
-      metrics: metrics
+      metrics: metrics,
+      balance: balance
     });
   };
 
@@ -61,7 +69,10 @@ class Main extends React.Component {
                 placement="right"
                 overlay={
                   <Popover id="popover-basic" title="What is this all about?">
-                    Making the world a better place, always.<span role="img" aria-label="Smiley face">😊</span>
+                    Good things come to those who wait.
+                    <span role="img" aria-label="Smiley face">
+                      😊
+                    </span>
                   </Popover>
                 }
               >
@@ -75,7 +86,10 @@ class Main extends React.Component {
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
           <DisplayProfileData profile={this.state.profile} />
-          <DisplayTableData metrics={this.state.metrics} />
+          <DisplayTableData
+            metrics={this.state.metrics}
+            balance={this.state.balance}
+          />
         </div>
       </div>
     );
