@@ -79,7 +79,7 @@ class DisplayEquityRow extends React.Component {
           <ButtonToolbar className="m-2 d-inline">
             <OverlayTrigger
               placement="right"
-              overlay={<Tooltip>(Change in shareholders equity)</Tooltip>}
+              overlay={<Tooltip>(Change in shareholders' equity)</Tooltip>}
             >
               <FontAwesomeIcon icon="question-circle" />
             </OverlayTrigger>
