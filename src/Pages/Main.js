@@ -5,7 +5,9 @@ import {
   ButtonToolbar,
   OverlayTrigger,
   Popover,
-  Alert
+  Alert,
+  Tabs,
+  Tab
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayTableData from "../Components/DisplayTableData";
@@ -118,20 +120,29 @@ class Main extends React.Component {
           {this.state.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
-          <DisplayProfileData profile={this.state.profile} />
-          <DisplayTableData
-            metrics={this.state.metrics}
-            balance={this.state.balance}
-            income={this.state.income}
-            cash={this.state.cash}
-          />
-          <DisplayRecommendation
-            profile={this.state.profile}
-            metrics={this.state.metrics}
-            balance={this.state.balance}
-            income={this.state.income}
-            cash={this.state.cash}
-          />
+          {this.state.metrics && (
+            <Tabs defaultActiveKey="quinton" className="w-100">
+              <Tab eventKey="quinton" title="Quinton">
+                <div className="row justify-content-center">
+                  <DisplayProfileData profile={this.state.profile} />
+                  <DisplayTableData
+                    metrics={this.state.metrics}
+                    balance={this.state.balance}
+                    income={this.state.income}
+                    cash={this.state.cash}
+                  />
+                  <DisplayRecommendation
+                    profile={this.state.profile}
+                    metrics={this.state.metrics}
+                    balance={this.state.balance}
+                    income={this.state.income}
+                    cash={this.state.cash}
+                  />
+                </div>
+              </Tab>
+              <Tab eventKey="ellen" title="Ellen" />
+            </Tabs>
+          )}
         </div>
       </div>
     );
