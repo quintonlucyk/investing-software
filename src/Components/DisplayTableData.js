@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import DisplayROICRow from "./SubComponents/DisplayROICRow";
 import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
+import DisplayPERow from "./SubComponents/DisplayPERow";
 
 class DisplayTableData extends React.Component {
   render() {
@@ -26,6 +27,7 @@ class DisplayTableData extends React.Component {
           <tbody>
             <DisplayROICRow metrics={this.props.metrics} />
             <DisplayEquityRow balance={this.props.balance} />
+            <DisplayPERow metrics={this.props.metrics} />
           </tbody>
         </Table>
       );

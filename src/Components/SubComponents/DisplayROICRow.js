@@ -7,10 +7,25 @@ class DisplayROICRow extends React.Component {
     let tenYearRoic = 0;
     let fiveYearRoic = 0;
     let oneYearRoic = 0;
-    let i = 0;
-    for (let yearData of this.props.metrics.metrics) {
-      if (yearData && yearData.ROIC && yearData.ROIC !== "") {
-        let float = parseFloat(yearData.ROIC) * 100;
+    for (let i = 0; i < 10; ++i) {
+      if (i === this.props.metrics.metrics.length) {
+        if (i < 1) {
+          oneYearRoic = "NA";
+          tenYearRoic = "NA";
+          fiveYearRoic = "NA";
+        }
+        if (i < 5) {
+          tenYearRoic = "NA";
+          fiveYearRoic = "NA";
+        } else {
+          tenYearRoic = "NA";
+        }
+      } else if (
+        this.props.metrics.metrics[i] &&
+        this.props.metrics.metrics[i].ROIC &&
+        this.props.metrics.metrics[i].ROIC !== ""
+      ) {
+        let float = parseFloat(this.props.metrics.metrics[i].ROIC) * 100;
         if (i < 1) {
           tenYearRoic += float;
           fiveYearRoic += float;
@@ -36,7 +51,6 @@ class DisplayROICRow extends React.Component {
           tenYearRoic = "NA";
         }
       }
-      ++i;
     }
     tenYearRoic =
       tenYearRoic === "NA"
@@ -54,7 +68,7 @@ class DisplayROICRow extends React.Component {
           <ButtonToolbar className="m-2 d-inline">
             <OverlayTrigger
               placement="right"
-              overlay={<Tooltip>(Return on Invested Capital)</Tooltip>}
+              overlay={<Tooltip>(Return on invested capital)</Tooltip>}
             >
               <FontAwesomeIcon icon="question-circle" />
             </OverlayTrigger>
