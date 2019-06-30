@@ -7,8 +7,20 @@ class DisplayEquityRow extends React.Component {
     let tenYearEquity = 0;
     let fiveYearEquity = 0;
     let oneYearEquity = 0;
-    for (let i = 0; i < this.props.balance.financials.length - 1; ++i) {
-      if (
+    for (let i = 0; i < 9; ++i) {
+      if (i === this.props.balance.financials.length - 1) {
+        if (i < 1) {
+          oneYearEquity = "NA";
+          tenYearEquity = "NA";
+          fiveYearEquity = "NA";
+        }
+        if (i < 5) {
+          tenYearEquity = "NA";
+          fiveYearEquity = "NA";
+        } else {
+          tenYearEquity = "NA";
+        }
+      } else if (
         this.props.balance.financials[i]["Total shareholders equity"] !== "" &&
         this.props.balance.financials[i + 1]["Total shareholders equity"] !== ""
       ) {
