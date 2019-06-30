@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c558dd784eac1441fbabb7b627c54185",
+    "revision": "0770e0dd6e8d51414e00e6e192e6d9f5",
     "url": "/investing-software/index.html"
   },
   {
-    "revision": "9ae7e531653a15571eea",
+    "revision": "ddff92d66473fe5ad910",
     "url": "/investing-software/static/css/main.3e0ef9d3.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/investing-software/static/js/2.2529cb45.chunk.js"
   },
   {
-    "revision": "9ae7e531653a15571eea",
-    "url": "/investing-software/static/js/main.9ea222d6.chunk.js"
+    "revision": "ddff92d66473fe5ad910",
+    "url": "/investing-software/static/js/main.dd34fe07.chunk.js"
   },
   {
     "revision": "56458f4aa23471c62d6a",
