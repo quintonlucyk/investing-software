@@ -57,3 +57,15 @@ export const cashCall = async symbol => {
     return { error: error };
   }
 };
+
+export const growthCall = async symbol => {
+  try {
+    const res = await fetch(
+      `https://financialmodelingprep.com/api/v3/financial-statement-growth/${symbol}`
+    );
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    return { error: error };
+  }
+};

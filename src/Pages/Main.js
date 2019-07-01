@@ -17,7 +17,8 @@ import {
   metricsCall,
   balanceCall,
   incomeCall,
-  cashCall
+  cashCall,
+  growthCall
 } from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -32,7 +33,8 @@ class Main extends React.Component {
       metrics: null,
       balance: null,
       income: null,
-      cash: null
+      cash: null,
+      growth: null
     };
   }
 
@@ -47,20 +49,23 @@ class Main extends React.Component {
         metrics: null,
         balance: null,
         income: null,
-        cash: null
+        cash: null,
+        growth: null
       });
       const profile = await profileCall(symbol);
       const metrics = await metricsCall(symbol);
       const balance = await balanceCall(symbol);
       const income = await incomeCall(symbol);
       const cash = await cashCall(symbol);
+      const growth = await growthCall(symbol);
       this.setState({
         loading: false,
         profile: profile,
         metrics: metrics,
         balance: balance,
         income: income,
-        cash: cash
+        cash: cash,
+        growth: growth
       });
     } else {
       this.setState({
@@ -70,7 +75,8 @@ class Main extends React.Component {
         metrics: null,
         balance: null,
         income: null,
-        cash: null
+        cash: null,
+        growth: null
       });
     }
   };
@@ -146,6 +152,7 @@ class Main extends React.Component {
                     balance={this.state.balance}
                     income={this.state.income}
                     cash={this.state.cash}
+                    growth={this.state.growth}
                   />
                 </div>
               </Tab>
