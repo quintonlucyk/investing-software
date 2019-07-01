@@ -1,10 +1,15 @@
 import { FETCH_DATA } from "./Types";
 
-// export fetchPosts = async (symbol) => {
+import {
+  profileCall,
+  metricsCall,
+  balanceCall,
+  incomeCall,
+  cashCall,
+  growthCall
+} from "../APICalls/FinancialModellingPrep";
 
-// };
-
-export const fetchData = async symbol => dispatch =>{
+export const fetchData = async symbol => async dispatch => {
   const profile = await profileCall(symbol);
   const metrics = await metricsCall(symbol);
   const balance = await balanceCall(symbol);

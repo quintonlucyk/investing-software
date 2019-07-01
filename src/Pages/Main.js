@@ -12,15 +12,9 @@ import {
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayTableData from "../Components/DisplayTableData";
 import DisplayRecommendation from "../Components/DisplayRecommendation";
-import {
-  profileCall,
-  metricsCall,
-  balanceCall,
-  incomeCall,
-  cashCall,
-  growthCall
-} from "../APICalls/FinancialModellingPrep";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
+import { fetchData } from "../Actions/DataAction";
 
 class Main extends React.Component {
   constructor(props) {
@@ -42,31 +36,32 @@ class Main extends React.Component {
     event.preventDefault();
     if (this.symbolRef.current.value !== "") {
       const symbol = this.symbolRef.current.value.toUpperCase();
-      this.setState({
-        error: false,
-        loading: true,
-        profile: null,
-        metrics: null,
-        balance: null,
-        income: null,
-        cash: null,
-        growth: null
-      });
-      // const profile = await profileCall(symbol);
-      // const metrics = await metricsCall(symbol);
-      // const balance = await balanceCall(symbol);
-      // const income = await incomeCall(symbol);
-      // const cash = await cashCall(symbol);
-      // const growth = await growthCall(symbol);
-      this.setState({
-        loading: false,
-        profile: profile,
-        metrics: metrics,
-        balance: balance,
-        income: income,
-        cash: cash,
-        growth: growth
-      });
+      // this.setState({
+      //   error: false,
+      //   loading: true,
+      //   profile: null,
+      //   metrics: null,
+      //   balance: null,
+      //   income: null,
+      //   cash: null,
+      //   growth: null
+      // });
+      // // const profile = await profileCall(symbol);
+      // // const metrics = await metricsCall(symbol);
+      // // const balance = await balanceCall(symbol);
+      // // const income = await incomeCall(symbol);
+      // // const cash = await cashCall(symbol);
+      // // const growth = await growthCall(symbol);
+      // this.setState({
+      //   loading: false,
+      //   profile: profile,
+      //   metrics: metrics,
+      //   balance: balance,
+      //   income: income,
+      //   cash: cash,
+      //   growth: growth
+      // });
+      this.props.fetchData(symbol);
     } else {
       this.setState({
         error: true,
@@ -165,4 +160,7 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default connect(
+  null,
+  { fetchData }
+)(Main);
