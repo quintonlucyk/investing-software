@@ -1,6 +1,8 @@
 import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
+import { increment, decrement, reset } from "./actionCreators";
 
 class DisplayPERow extends React.Component {
   render() {
@@ -100,4 +102,15 @@ class DisplayPERow extends React.Component {
   }
 }
 
-export default DisplayPERow;
+const mapStateToProps = (state /*, ownProps*/) => {
+  return {
+    counter: state.counter
+  };
+};
+
+const mapDispatchToProps = { increment, decrement, reset };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DisplayPERow);
