@@ -52,12 +52,12 @@ class Main extends React.Component {
         cash: null,
         growth: null
       });
-      const profile = await profileCall(symbol);
-      const metrics = await metricsCall(symbol);
-      const balance = await balanceCall(symbol);
-      const income = await incomeCall(symbol);
-      const cash = await cashCall(symbol);
-      const growth = await growthCall(symbol);
+      // const profile = await profileCall(symbol);
+      // const metrics = await metricsCall(symbol);
+      // const balance = await balanceCall(symbol);
+      // const income = await incomeCall(symbol);
+      // const cash = await cashCall(symbol);
+      // const growth = await growthCall(symbol);
       this.setState({
         loading: false,
         profile: profile,
