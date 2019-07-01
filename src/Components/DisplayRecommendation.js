@@ -47,9 +47,58 @@ class DisplayRecommendation extends React.Component {
       let myAlert = null;
       if (
         this.props.income.financials[0] &&
-        this.props.income.financials[0].EPS
+        this.props.income.financials[0].EPS &&
+        this.props.growth.growth[0][
+          "10Y Shareholders Equity Growth (per Share)"
+        ] &&
+        this.props.growth.growth[0][
+          "5Y Shareholders Equity Growth (per Share)"
+        ] &&
+        this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
       ) {
-        const EPS = this.props.income.financials[0].EPS;
+        const eps = parseFloat(this.props.income.financials[0].EPS);
+        const growth = Math.min(
+          parseFloat(
+            this.props.growth.growth[0][
+              "10Y Shareholders Equity Growth (per Share)"
+            ]
+          ),
+          parseFloat(
+            this.props.growth.growth[0][
+              "5Y Shareholders Equity Growth (per Share)"
+            ]
+          ),
+          parseFloat(
+            this.props.growth.growth[0][
+              "3Y Shareholders Equity Growth (per Share)"
+            ]
+          )
+        );
+        console.log("eps", eps);
+        console.log("growth", growth);
+      } else if (
+        this.props.income.financials[0] &&
+        this.props.income.financials[0].EPS &&
+        this.props.growth.growth[0][
+          "5Y Shareholders Equity Growth (per Share)"
+        ] &&
+        this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
+      ) {
+        const eps = parseFloat(this.props.income.financials[0].EPS);
+        const growth = Math.min(
+          parseFloat(
+            this.props.growth.growth[0][
+              "5Y Shareholders Equity Growth (per Share)"
+            ]
+          ),
+          parseFloat(
+            this.props.growth.growth[0][
+              "3Y Shareholders Equity Growth (per Share)"
+            ]
+          )
+        );
+        console.log("eps", eps);
+        console.log("growth", growth);
       }
 
       return (

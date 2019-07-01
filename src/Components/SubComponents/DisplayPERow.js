@@ -57,6 +57,12 @@ class DisplayPERow extends React.Component {
     fiveYearPE =
       fiveYearPE === "NA" ? "NA" : Number.parseFloat(fiveYearPE / 5).toFixed(2);
 
+    const minPE = Math.min(
+      oneYearPE === "NA" ? Infinity : oneYearPE,
+      fiveYearPE === "NA" ? Infinity : fiveYearPE,
+      tenYearPE === "NA" ? Infinity : tenYearPE
+    );
+
     return (
       <tr>
         <td>
