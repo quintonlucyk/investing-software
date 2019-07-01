@@ -120,7 +120,16 @@ class Main extends React.Component {
           {this.state.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
-          {this.state.metrics && (
+          {this.state.profile && this.state.profile.Error && (
+            <React.Fragment>
+              <p>
+                Shoots. Looks like something went wrong. Here is the error we
+                got:
+              </p>
+              <p>{this.state.profile.Error}</p>
+            </React.Fragment>
+          )}
+          {this.state.metrics && !this.state.metrics.Error && (
             <Tabs defaultActiveKey="quinton" className="w-100">
               <Tab eventKey="quinton" title="Quinton">
                 <div className="row justify-content-center">

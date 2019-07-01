@@ -4,16 +4,7 @@ class DisplayProfileData extends React.Component {
   render() {
     if (this.props.profile == null) {
       return null;
-    } else if (this.props.profile.Error !== undefined) {
-      return (
-        <React.Fragment>
-          <p>
-            Shoots. Looks like something went wrong. Here is the error we got:
-          </p>
-          <p>{this.props.profile.Error}</p>
-        </React.Fragment>
-      );
-    } else {
+    } else if (this.props.profile.Error === undefined) {
       return (
         <React.Fragment>
           <ul>
@@ -28,6 +19,8 @@ class DisplayProfileData extends React.Component {
           </ul>
         </React.Fragment>
       );
+    } else {
+      return null;
     }
   }
 }
