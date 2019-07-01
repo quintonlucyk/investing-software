@@ -81,9 +81,21 @@ class DisplayFreeCashRow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearCash}</td>
-        <td>{fiveYearCash}</td>
-        <td>{tenYearCash}</td>
+        {oneYearCash[0] === "-" ? (
+          <td className="negative-number">{oneYearCash}</td>
+        ) : (
+          <td>{oneYearCash}</td>
+        )}
+        {fiveYearCash[0] === "-" ? (
+          <td className="negative-number">{fiveYearCash}</td>
+        ) : (
+          <td>{fiveYearCash}</td>
+        )}
+        {tenYearCash[0] === "-" ? (
+          <td className="negative-number">{tenYearCash}</td>
+        ) : (
+          <td>{tenYearCash}</td>
+        )}
       </tr>
     );
   }

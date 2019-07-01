@@ -74,9 +74,21 @@ class DisplayROICRow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearRoic}</td>
-        <td>{fiveYearRoic}</td>
-        <td>{tenYearRoic}</td>
+        {oneYearRoic[0] === "-" ? (
+          <td className="negative-number">{oneYearRoic}</td>
+        ) : (
+          <td>{oneYearRoic}</td>
+        )}
+        {fiveYearRoic[0] === "-" ? (
+          <td className="negative-number">{fiveYearRoic}</td>
+        ) : (
+          <td>{fiveYearRoic}</td>
+        )}
+        {tenYearRoic[0] === "-" ? (
+          <td className="negative-number">{tenYearRoic}</td>
+        ) : (
+          <td>{tenYearRoic}</td>
+        )}
       </tr>
     );
   }

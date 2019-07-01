@@ -74,9 +74,21 @@ class DisplayPERow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearPE}</td>
-        <td>{fiveYearPE}</td>
-        <td>{tenYearPE}</td>
+        {oneYearPE[0] === "-" ? (
+          <td className="negative-number">{oneYearPE}</td>
+        ) : (
+          <td>{oneYearPE}</td>
+        )}
+        {fiveYearPE[0] === "-" ? (
+          <td className="negative-number">{fiveYearPE}</td>
+        ) : (
+          <td>{fiveYearPE}</td>
+        )}
+        {tenYearPE[0] === "-" ? (
+          <td className="negative-number">{tenYearPE}</td>
+        ) : (
+          <td>{tenYearPE}</td>
+        )}
       </tr>
     );
   }

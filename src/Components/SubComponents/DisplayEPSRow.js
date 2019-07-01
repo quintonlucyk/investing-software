@@ -81,9 +81,21 @@ class DisplayEPSRow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearEPS}</td>
-        <td>{fiveYearEPS}</td>
-        <td>{tenYearEPS}</td>
+        {oneYearEPS[0] === "-" ? (
+          <td className="negative-number">{oneYearEPS}</td>
+        ) : (
+          <td>{oneYearEPS}</td>
+        )}
+        {fiveYearEPS[0] === "-" ? (
+          <td className="negative-number">{fiveYearEPS}</td>
+        ) : (
+          <td>{fiveYearEPS}</td>
+        )}
+        {tenYearEPS[0] === "-" ? (
+          <td className="negative-number">{tenYearEPS}</td>
+        ) : (
+          <td>{tenYearEPS}</td>
+        )}
       </tr>
     );
   }

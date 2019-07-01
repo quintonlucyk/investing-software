@@ -75,9 +75,21 @@ class DisplayRevenueRow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearRevenue}</td>
-        <td>{fiveYearRevenue}</td>
-        <td>{tenYearRevenue}</td>
+        {oneYearRevenue[0] === "-" ? (
+          <td className="negative-number">{oneYearRevenue}</td>
+        ) : (
+          <td>{oneYearRevenue}</td>
+        )}
+        {fiveYearRevenue[0] === "-" ? (
+          <td className="negative-number">{fiveYearRevenue}</td>
+        ) : (
+          <td>{fiveYearRevenue}</td>
+        )}
+        {tenYearRevenue[0] === "-" ? (
+          <td className="negative-number">{tenYearRevenue}</td>
+        ) : (
+          <td>{tenYearRevenue}</td>
+        )}
       </tr>
     );
   }

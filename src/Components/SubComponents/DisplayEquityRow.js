@@ -85,9 +85,21 @@ class DisplayEquityRow extends React.Component {
             </OverlayTrigger>
           </ButtonToolbar>
         </td>
-        <td>{oneYearEquity}</td>
-        <td>{fiveYearEquity}</td>
-        <td>{tenYearEquity}</td>
+        {oneYearEquity[0] === "-" ? (
+          <td className="negative-number">{oneYearEquity}</td>
+        ) : (
+          <td>{oneYearEquity}</td>
+        )}
+        {fiveYearEquity[0] === "-" ? (
+          <td className="negative-number">{fiveYearEquity}</td>
+        ) : (
+          <td>{fiveYearEquity}</td>
+        )}
+        {tenYearEquity[0] === "-" ? (
+          <td className="negative-number">{tenYearEquity}</td>
+        ) : (
+          <td>{tenYearEquity}</td>
+        )}
       </tr>
     );
   }
