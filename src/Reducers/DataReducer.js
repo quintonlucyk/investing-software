@@ -1,4 +1,8 @@
-import { FETCH_DATA } from "../Actions/Types";
+import {
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_START,
+  FETCH_DATA_ERROR
+} from "../Actions/Types";
 
 const initialState = {
   error: false,
@@ -13,7 +17,17 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_DATA:
+    case FETCH_DATA_SUCCESS:
+      return {
+        ...state,
+        data: action.payload
+      };
+    case FETCH_DATA_START:
+      return {
+        ...state,
+        data: action.payload
+      };
+    case FETCH_DATA_ERROR:
       return {
         ...state,
         data: action.payload
