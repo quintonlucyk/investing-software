@@ -51,62 +51,82 @@ class DisplayRecommendation extends React.Component {
         this.props.income.financials[0] &&
         this.props.income.financials[0].EPS &&
         this.props.growth.growth[0][
-          "10Y Shareholders Equity Growth (per Share)"
-        ] &&
-        this.props.growth.growth[0][
           "5Y Shareholders Equity Growth (per Share)"
         ] &&
         this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
       ) {
         const eps = parseFloat(this.props.income.financials[0].EPS);
-        const growth = Math.min(
-          parseFloat(
-            this.props.growth.growth[0][
-              "10Y Shareholders Equity Growth (per Share)"
-            ]
-          ),
-          parseFloat(
-            this.props.growth.growth[0][
-              "5Y Shareholders Equity Growth (per Share)"
-            ]
-          ),
-          parseFloat(
-            this.props.growth.growth[0][
-              "3Y Shareholders Equity Growth (per Share)"
-            ]
-          )
+        let growth;
+        if (
+          this.props.growth.growth[0][
+            "10Y Shareholders Equity Growth (per Share)"
+          ]
+        ) {
+          growth = Math.min(
+            parseFloat(
+              this.props.growth.growth[0][
+                "10Y Shareholders Equity Growth (per Share)"
+              ]
+            ),
+            parseFloat(
+              this.props.growth.growth[0][
+                "5Y Shareholders Equity Growth (per Share)"
+              ]
+            ),
+            parseFloat(
+              this.props.growth.growth[0][
+                "3Y Shareholders Equity Growth (per Share)"
+              ]
+            )
+          );
+        } else {
+          growth = Math.min(
+            parseFloat(
+              this.props.growth.growth[0][
+                "5Y Shareholders Equity Growth (per Share)"
+              ]
+            ),
+            parseFloat(
+              this.props.growth.growth[0][
+                "3Y Shareholders Equity Growth (per Share)"
+              ]
+            )
+          );
+        }
+        const minPE = Math.min(
+          parseFloat(this.props.minPE),
+          parseFloat(growth * 100 * 2)
         );
-        console.log("eps", eps);
-        console.log("growth", growth);
-      } else if (
-        this.props.income.financials[0] &&
-        this.props.income.financials[0].EPS &&
-        this.props.growth.growth[0][
-          "5Y Shareholders Equity Growth (per Share)"
-        ] &&
-        this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
-      ) {
-        const eps = parseFloat(this.props.income.financials[0].EPS);
-        const growth = Math.min(
-          parseFloat(
-            this.props.growth.growth[0][
-              "5Y Shareholders Equity Growth (per Share)"
-            ]
-          ),
-          parseFloat(
-            this.props.growth.growth[0][
-              "3Y Shareholders Equity Growth (per Share)"
-            ]
-          )
-        );
-        console.log("eps", eps);
-        console.log("growth", growth);
+
+        const futureEPS = eps * 3.056;
+        const futureStockPrice = futureEPS * minPE;
+        const stickerPrice = futureStockPrice / 4;
+        const myPrice = stickerPrice * 0.6;
+        if (price < myPrice) {
+          myAlert = (
+            <Alert variant="success">
+              My Number: ${Number.parseFloat(myPrice).toFixed(2)}
+            </Alert>
+          );
+        } else {
+          myAlert = (
+            <Alert variant="secondary">
+              My Number: ${Number.parseFloat(myPrice).toFixed(2)}
+            </Alert>
+          );
+        }
       }
 
       return (
         <React.Fragment>
-          {grahamAlert}
-          {myAlert}
+          {grahamAlert !== null ? (
+            <div className="row justify-content-center mb-3 ">
+              {grahamAlert}
+            </div>
+          ) : null}
+          {myAlert !== null ? (
+            <div className="row justify-content-center mb-3 ">{myAlert}</div>
+          ) : null}
         </React.Fragment>
       );
     } else {
@@ -126,7 +146,8 @@ const mapStateToProps = state => ({
   balance: state.fetchedData.balance,
   income: state.fetchedData.income,
   cash: state.fetchedData.cash,
-  growth: state.fetchedData.growth
+  growth: state.fetchedData.growth,
+  minPE: state.minPE
 });
 
 export default connect(mapStateToProps)(DisplayRecommendation);

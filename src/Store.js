@@ -12,7 +12,8 @@ const initialState = {
     income: null,
     cash: null,
     growth: null
-  }
+  },
+  minPE: null
 };
 
 const middleware = [thunk];

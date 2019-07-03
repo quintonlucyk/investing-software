@@ -78,7 +78,6 @@ class Main extends React.Component {
               </p>
             </Alert>
           )}
-          {console.log("this.props", this.props)}
           {!this.state.noSymbolSearch && this.props.fetchedData.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
@@ -116,9 +115,7 @@ class Main extends React.Component {
                   <div className="row justify-content-center mb-3 ">
                     <DisplayTableData />
                   </div>
-                  <div className="row justify-content-center mb-3 ">
-                    <DisplayRecommendation />
-                  </div>
+                  <DisplayRecommendation />
                 </Tab>
                 <Tab eventKey="ellen" title="Ellen" />
               </Tabs>

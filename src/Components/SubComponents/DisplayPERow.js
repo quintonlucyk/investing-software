@@ -2,6 +2,7 @@ import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
+import { setMinPE } from "../../Actions/MinPEAction";
 
 class DisplayPERow extends React.Component {
   render() {
@@ -63,6 +64,7 @@ class DisplayPERow extends React.Component {
       fiveYearPE === "NA" ? Infinity : fiveYearPE,
       tenYearPE === "NA" ? Infinity : tenYearPE
     );
+    this.props.setMinPE(minPE);
 
     return (
       <tr>
@@ -105,4 +107,7 @@ const mapStateToProps = state => ({
   metrics: state.fetchedData.metrics
 });
 
-export default connect(mapStateToProps)(DisplayPERow);
+export default connect(
+  mapStateToProps,
+  { setMinPE }
+)(DisplayPERow);
