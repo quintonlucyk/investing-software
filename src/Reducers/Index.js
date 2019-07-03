@@ -3,5 +3,5 @@ import DataReducer from "./DataReducer";
 // import MinPEReducer from "./MinPEReducer";
 
 export default combineReducers({
-  data: DataReducer
+  fetchedData: DataReducer
 });

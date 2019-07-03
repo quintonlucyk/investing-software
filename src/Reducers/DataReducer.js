@@ -1,6 +1,6 @@
 import {
   FETCH_DATA_SUCCESS,
-  FETCH_DATA_START,
+  FETCH_DATA_STARTED,
   FETCH_DATA_ERROR
 } from "../Actions/Types";
 
@@ -20,17 +20,19 @@ export default function(state = initialState, action) {
     case FETCH_DATA_SUCCESS:
       return {
         ...state,
-        data: action.payload
+        loading: false,
+        ...action.payload
       };
-    case FETCH_DATA_START:
+    case FETCH_DATA_STARTED:
       return {
-        ...state,
-        data: action.payload
+        ...initialState,
+        loading: true
       };
     case FETCH_DATA_ERROR:
       return {
         ...state,
-        data: action.payload
+        loading: false,
+        error: true
       };
     default:
       return state;

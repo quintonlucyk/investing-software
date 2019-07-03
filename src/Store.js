@@ -3,14 +3,16 @@ import thunk from "redux-thunk";
 import rootReducer from "./Reducers";
 
 const initialState = {
-  error: false,
-  loading: false,
-  profile: null,
-  metrics: null,
-  balance: null,
-  income: null,
-  cash: null,
-  growth: null
+  fetchedData: {
+    error: false,
+    loading: false,
+    profile: null,
+    metrics: null,
+    balance: null,
+    income: null,
+    cash: null,
+    growth: null
+  }
 };
 
 const middleware = [thunk];

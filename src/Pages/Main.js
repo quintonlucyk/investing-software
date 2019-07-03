@@ -21,58 +21,18 @@ class Main extends React.Component {
     super(props);
     this.symbolRef = React.createRef();
     this.state = {
-      error: false,
-      loading: false,
-      profile: null,
-      metrics: null,
-      balance: null,
-      income: null,
-      cash: null,
-      growth: null
+      noSymbolSearch: false
     };
   }
 
-  search = async event => {
+  search = event => {
     event.preventDefault();
     if (this.symbolRef.current.value !== "") {
+      this.setState({ noSymbolSearch: false });
       const symbol = this.symbolRef.current.value.toUpperCase();
-      // this.setState({
-      //   error: false,
-      //   loading: true,
-      //   profile: null,
-      //   metrics: null,
-      //   balance: null,
-      //   income: null,
-      //   cash: null,
-      //   growth: null
-      // });
-      // // const profile = await profileCall(symbol);
-      // // const metrics = await metricsCall(symbol);
-      // // const balance = await balanceCall(symbol);
-      // // const income = await incomeCall(symbol);
-      // // const cash = await cashCall(symbol);
-      // // const growth = await growthCall(symbol);
-      // this.setState({
-      //   loading: false,
-      //   profile: profile,
-      //   metrics: metrics,
-      //   balance: balance,
-      //   income: income,
-      //   cash: cash,
-      //   growth: growth
-      // });
       this.props.fetchData(symbol);
     } else {
-      this.setState({
-        error: true,
-        loading: false,
-        profile: null,
-        metrics: null,
-        balance: null,
-        income: null,
-        cash: null,
-        growth: null
-      });
+      this.setState({ noSymbolSearch: true });
     }
   };
 
@@ -111,56 +71,76 @@ class Main extends React.Component {
           </Form>
         </div>
         <div className="row justify-content-center m-4">
-          {this.state.error && (
+          {this.state.noSymbolSearch && (
             <Alert variant="danger">
               <p className="m-0">
                 You need to enter a stock symbol to search for.
               </p>
             </Alert>
           )}
-          {this.state.loading && (
+          {console.log("this.props", this.props)}
+          {!this.state.noSymbolSearch && this.props.fetchedData.loading && (
             <FontAwesomeIcon className="fa-spin" size="lg" icon="spinner" />
           )}
-          {this.state.profile && this.state.profile.Error && (
-            <React.Fragment>
-              <p>
-                Shoots. Looks like something went wrong. Here is the error we
-                got:
-              </p>
-              <p>{this.state.profile.Error}</p>
-            </React.Fragment>
-          )}
-          {this.state.metrics && !this.state.metrics.Error && (
-            <Tabs defaultActiveKey="quinton" className="w-100">
-              <Tab eventKey="quinton" title="Quinton">
-                <div className="row justify-content-center">
-                  <DisplayProfileData profile={this.state.profile} />
-                  <DisplayTableData
-                    metrics={this.state.metrics}
-                    balance={this.state.balance}
-                    income={this.state.income}
-                    cash={this.state.cash}
-                  />
-                  <DisplayRecommendation
-                    profile={this.state.profile}
-                    metrics={this.state.metrics}
-                    balance={this.state.balance}
-                    income={this.state.income}
-                    cash={this.state.cash}
-                    growth={this.state.growth}
-                  />
-                </div>
-              </Tab>
-              <Tab eventKey="ellen" title="Ellen" />
-            </Tabs>
-          )}
+          {!this.state.noSymbolSearch &&
+            this.props.fetchedData.profile &&
+            this.props.fetchedData.profile.apiError && (
+              <Alert variant="danger">
+                <p className="m-0">
+                  Looks like we got an error from where the data comes from...
+                </p>
+              </Alert>
+            )}
+          {!this.state.noSymbolSearch &&
+            this.props.fetchedData.profile &&
+            this.props.fetchedData.profile.Error && (
+              <React.Fragment>
+                <p>
+                  Shoots. Looks like something went wrong. Here is the error we
+                  got:
+                </p>
+                <p>{this.props.fetchedData.profile.Error}</p>
+              </React.Fragment>
+            )}
+          {!this.state.noSymbolSearch &&
+            this.props.fetchedData.profile &&
+            !this.props.fetchedData.profile.Error && (
+              <Tabs defaultActiveKey="quinton" className="w-100">
+                <Tab eventKey="quinton" title="Quinton">
+                  <div className="row justify-content-center">
+                    <DisplayProfileData
+                    // profile={this.state.profile}
+                    />
+                    <DisplayTableData
+                    // metrics={this.state.metrics}
+                    // balance={this.state.balance}
+                    // income={this.state.income}
+                    // cash={this.state.cash}
+                    />
+                    <DisplayRecommendation
+                    // profile={this.state.profile}
+                    // metrics={this.state.metrics}
+                    // balance={this.state.balance}
+                    // income={this.state.income}
+                    // cash={this.state.cash}
+                    // growth={this.state.growth}
+                    />
+                  </div>
+                </Tab>
+                <Tab eventKey="ellen" title="Ellen" />
+              </Tabs>
+            )}
         </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  fetchedData: state.fetchedData
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { fetchData }
 )(Main);

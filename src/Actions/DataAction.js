@@ -1,7 +1,7 @@
 import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_ERROR,
-  FETCH_DATA_START
+  FETCH_DATA_STARTED
 } from "./Types";
 
 import {
@@ -13,41 +13,34 @@ import {
   growthCall
 } from "../APICalls/FinancialModellingPrep";
 
-export const fetchData = symbol => async dispatch => {
-  if (symbol !== "") {
-    const profile = await profileCall(symbol);
-    const metrics = await metricsCall(symbol);
-    const balance = await balanceCall(symbol);
-    const income = await incomeCall(symbol);
-    const cash = await cashCall(symbol);
-    const growth = await growthCall(symbol);
+const fetchDataError = () => {
+  return { type: FETCH_DATA_ERROR };
+};
 
-    dispatch({
-      type: FETCH_DATA_START,
-      payload: {
-        error: false,
-        loading: false,
-        profile: profile,
-        metrics: metrics,
-        balance: balance,
-        income: income,
-        cash: cash,
-        growth: growth
-      }
-    });
+const fetchDataStarted = () => {
+  return { type: FETCH_DATA_STARTED };
+};
+
+const fetchDataSuccess = data => {
+  return { type: FETCH_DATA_SUCCESS, payload: data };
+};
+
+//start fetch
+export const fetchData = symbol => async dispatch => {
+  dispatch(fetchDataStarted());
+
+  const profile = await profileCall(symbol);
+  const metrics = await metricsCall(symbol);
+  const balance = await balanceCall(symbol);
+  const income = await incomeCall(symbol);
+  const cash = await cashCall(symbol);
+  const growth = await growthCall(symbol);
+
+  if (!profile.apiError) {
+    dispatch(
+      fetchDataSuccess({ profile, metrics, balance, income, cash, growth })
+    );
   } else {
-    dispatch({
-      type: FETCH_DATA_START,
-      payload: {
-        error: false,
-        loading: false,
-        profile: null,
-        metrics: null,
-        balance: null,
-        income: null,
-        cash: null,
-        growth: null
-      }
-    });
+    dispatch(fetchDataError);
   }
 };

@@ -6,7 +6,7 @@ export const profileCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
 
@@ -18,7 +18,7 @@ export const metricsCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
 
@@ -30,7 +30,7 @@ export const balanceCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
 
@@ -42,7 +42,7 @@ export const incomeCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
 
@@ -54,7 +54,7 @@ export const cashCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
 
@@ -66,6 +66,6 @@ export const growthCall = async symbol => {
     const json = await res.json();
     return json;
   } catch (error) {
-    return { error: error };
+    return { apiError: error };
   }
 };
