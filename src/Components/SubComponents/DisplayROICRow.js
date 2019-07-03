@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 class DisplayROICRow extends React.Component {
   render() {
@@ -94,4 +95,8 @@ class DisplayROICRow extends React.Component {
   }
 }
 
-export default DisplayROICRow;
+const mapStateToProps = state => ({
+  metrics: state.fetchedData.metrics
+});
+
+export default connect(mapStateToProps)(DisplayROICRow);

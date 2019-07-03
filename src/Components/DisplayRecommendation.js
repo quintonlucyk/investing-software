@@ -1,11 +1,13 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
+import { connect } from "react-redux";
 
 class DisplayRecommendation extends React.Component {
   render() {
     if (this.props.metrics == null) {
       return null;
     } else if (
+      this.props.profile.Error === undefined &&
       this.props.metrics.Error === undefined &&
       this.props.balance.Error === undefined &&
       this.props.income.Error === undefined &&
@@ -118,4 +120,13 @@ class DisplayRecommendation extends React.Component {
   }
 }
 
-export default DisplayRecommendation;
+const mapStateToProps = state => ({
+  profile: state.fetchedData.profile,
+  metrics: state.fetchedData.metrics,
+  balance: state.fetchedData.balance,
+  income: state.fetchedData.income,
+  cash: state.fetchedData.cash,
+  growth: state.fetchedData.growth
+});
+
+export default connect(mapStateToProps)(DisplayRecommendation);

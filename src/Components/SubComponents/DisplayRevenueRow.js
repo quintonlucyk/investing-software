@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 class DisplayRevenueRow extends React.Component {
   render() {
@@ -95,4 +96,8 @@ class DisplayRevenueRow extends React.Component {
   }
 }
 
-export default DisplayRevenueRow;
+const mapStateToProps = state => ({
+  income: state.fetchedData.income
+});
+
+export default connect(mapStateToProps)(DisplayRevenueRow);

@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 class DisplayOperatingCashRow extends React.Component {
   render() {
@@ -103,4 +104,8 @@ class DisplayOperatingCashRow extends React.Component {
   }
 }
 
-export default DisplayOperatingCashRow;
+const mapStateToProps = state => ({
+  cash: state.fetchedData.cash
+});
+
+export default connect(mapStateToProps)(DisplayOperatingCashRow);

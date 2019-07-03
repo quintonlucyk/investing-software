@@ -101,4 +101,8 @@ class DisplayPERow extends React.Component {
   }
 }
 
-export default DisplayPERow;
+const mapStateToProps = state => ({
+  metrics: state.fetchedData.metrics
+});
+
+export default connect(mapStateToProps)(DisplayPERow);

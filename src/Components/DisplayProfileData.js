@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 class DisplayProfileData extends React.Component {
   render() {
@@ -25,4 +26,8 @@ class DisplayProfileData extends React.Component {
   }
 }
 
-export default DisplayProfileData;
+const mapStateToProps = state => ({
+  profile: state.fetchedData.profile
+});
+
+export default connect(mapStateToProps)(DisplayProfileData);

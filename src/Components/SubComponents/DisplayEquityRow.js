@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 class DisplayEquityRow extends React.Component {
   render() {
@@ -105,4 +106,8 @@ class DisplayEquityRow extends React.Component {
   }
 }
 
-export default DisplayEquityRow;
+const mapStateToProps = state => ({
+  balance: state.fetchedData.balance
+});
+
+export default connect(mapStateToProps)(DisplayEquityRow);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import { connect } from "react-redux";
 import DisplayROICRow from "./SubComponents/DisplayROICRow";
 import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
 import DisplayEPSRow from "./SubComponents/DisplayEPSRow";
@@ -29,13 +30,13 @@ class DisplayTableData extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <DisplayROICRow metrics={this.props.metrics} />
-            <DisplayEquityRow balance={this.props.balance} />
-            <DisplayEPSRow income={this.props.income} />
-            <DisplayRevenueRow income={this.props.income} />
-            <DisplayFreeCashRow cash={this.props.cash} />
-            <DisplayOperatingCashRow cash={this.props.cash} />
-            <DisplayPERow metrics={this.props.metrics} />
+            <DisplayROICRow />
+            <DisplayEquityRow />
+            <DisplayEPSRow />
+            <DisplayRevenueRow />
+            <DisplayFreeCashRow />
+            <DisplayOperatingCashRow />
+            <DisplayPERow />
           </tbody>
         </Table>
       );
@@ -45,4 +46,11 @@ class DisplayTableData extends React.Component {
   }
 }
 
-export default DisplayTableData;
+const mapStateToProps = state => ({
+  metrics: state.fetchedData.metrics,
+  balance: state.fetchedData.balance,
+  income: state.fetchedData.income,
+  cash: state.fetchedData.cash
+});
+
+export default connect(mapStateToProps)(DisplayTableData);

@@ -107,24 +107,14 @@ class Main extends React.Component {
             !this.props.fetchedData.profile.Error && (
               <Tabs defaultActiveKey="quinton" className="w-100">
                 <Tab eventKey="quinton" title="Quinton">
-                  <div className="row justify-content-center">
-                    <DisplayProfileData
-                    // profile={this.state.profile}
-                    />
-                    <DisplayTableData
-                    // metrics={this.state.metrics}
-                    // balance={this.state.balance}
-                    // income={this.state.income}
-                    // cash={this.state.cash}
-                    />
-                    <DisplayRecommendation
-                    // profile={this.state.profile}
-                    // metrics={this.state.metrics}
-                    // balance={this.state.balance}
-                    // income={this.state.income}
-                    // cash={this.state.cash}
-                    // growth={this.state.growth}
-                    />
+                  <div className="row justify-content-center py-2 ">
+                    <DisplayProfileData />
+                  </div>
+                  <div className="row justify-content-center py-2 ">
+                    <DisplayTableData />
+                  </div>
+                  <div className="row justify-content-center py-2 ">
+                    <DisplayRecommendation />
                   </div>
                 </Tab>
                 <Tab eventKey="ellen" title="Ellen" />
