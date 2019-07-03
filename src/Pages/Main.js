@@ -105,15 +105,18 @@ class Main extends React.Component {
           {!this.state.noSymbolSearch &&
             this.props.fetchedData.profile &&
             !this.props.fetchedData.profile.Error && (
-              <Tabs defaultActiveKey="quinton" className="w-100">
+              <Tabs
+                defaultActiveKey="quinton"
+                className="w-100 d-flex justify-content-center mb-4"
+              >
                 <Tab eventKey="quinton" title="Quinton">
-                  <div className="row justify-content-center py-2 ">
+                  <div className="row justify-content-center mb-3 ">
                     <DisplayProfileData />
                   </div>
-                  <div className="row justify-content-center py-2 ">
+                  <div className="row justify-content-center mb-3 ">
                     <DisplayTableData />
                   </div>
-                  <div className="row justify-content-center py-2 ">
+                  <div className="row justify-content-center mb-3 ">
                     <DisplayRecommendation />
                   </div>
                 </Tab>
