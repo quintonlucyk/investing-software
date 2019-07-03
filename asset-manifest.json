@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/investing-software/static/css/main.3e0ef9d3.chunk.css",
-    "main.js": "/investing-software/static/js/main.f7328bdd.chunk.js",
-    "main.js.map": "/investing-software/static/js/main.f7328bdd.chunk.js.map",
+    "main.css": "/investing-software/static/css/main.cb89068b.chunk.css",
+    "main.js": "/investing-software/static/js/main.94827be6.chunk.js",
+    "main.js.map": "/investing-software/static/js/main.94827be6.chunk.js.map",
     "runtime~main.js": "/investing-software/static/js/runtime~main.863e9e57.js",
     "runtime~main.js.map": "/investing-software/static/js/runtime~main.863e9e57.js.map",
-    "static/js/2.1b632e40.chunk.js": "/investing-software/static/js/2.1b632e40.chunk.js",
-    "static/js/2.1b632e40.chunk.js.map": "/investing-software/static/js/2.1b632e40.chunk.js.map",
+    "static/js/2.98177bd3.chunk.js": "/investing-software/static/js/2.98177bd3.chunk.js",
+    "static/js/2.98177bd3.chunk.js.map": "/investing-software/static/js/2.98177bd3.chunk.js.map",
     "index.html": "/investing-software/index.html",
-    "precache-manifest.06fbebfc5c490b33bf3760f4bb2c0209.js": "/investing-software/precache-manifest.06fbebfc5c490b33bf3760f4bb2c0209.js",
+    "precache-manifest.084082cbebc05518a7c4b1edf122599a.js": "/investing-software/precache-manifest.084082cbebc05518a7c4b1edf122599a.js",
     "service-worker.js": "/investing-software/service-worker.js",
-    "static/css/main.3e0ef9d3.chunk.css.map": "/investing-software/static/css/main.3e0ef9d3.chunk.css.map"
+    "static/css/main.cb89068b.chunk.css.map": "/investing-software/static/css/main.cb89068b.chunk.css.map"
   }
 }
