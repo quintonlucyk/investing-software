@@ -117,7 +117,12 @@ class Main extends React.Component {
                   </div>
                   <DisplayRecommendation />
                 </Tab>
-                <Tab eventKey="ellen" title="Ellen" />
+                <Tab eventKey="ellen" title="Ellen">
+                  Coming soon{" "}
+                  <span role="img" aria-label="Smiley face">
+                    😊
+                  </span>
+                </Tab>
               </Tabs>
             )}
         </div>
