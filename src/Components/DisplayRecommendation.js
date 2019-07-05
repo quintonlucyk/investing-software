@@ -50,6 +50,7 @@ class DisplayRecommendation extends React.Component {
       if (
         this.props.income.financials[0] &&
         this.props.income.financials[0].EPS &&
+        this.props.growth.growth[0] &&
         this.props.growth.growth[0][
           "5Y Shareholders Equity Growth (per Share)"
         ] &&
