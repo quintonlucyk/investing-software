@@ -10,7 +10,8 @@ import {
   Tab
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
-import DisplayTableData from "../Components/DisplayTableData";
+import DisplayMyTableData from "../Components/DisplayMyTableData";
+import DisplayEllenTableData from "../Components/DisplayEllenTableData";
 import DisplayRecommendation from "../Components/DisplayRecommendation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
@@ -20,10 +21,28 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.symbolRef = React.createRef();
+    let key;
+    if (window.location.href.toLowerCase().includes("ellen")) {
+      key = 2;
+    } else {
+      key = 1;
+    }
+    console.log(key);
     this.state = {
-      noSymbolSearch: false
+      noSymbolSearch: false,
+      key: key
     };
   }
+
+  setKey = key => {
+    if (key === 2) {
+      window.location.hash = "#ellen";
+    } else {
+      window.location.hash = "#";
+    }
+    console.log(window.location);
+    this.setState({ key: key });
+  };
 
   search = event => {
     event.preventDefault();
@@ -105,23 +124,23 @@ class Main extends React.Component {
             this.props.fetchedData.profile &&
             !this.props.fetchedData.profile.Error && (
               <Tabs
-                defaultActiveKey="quinton"
+                activeKey={this.state.key}
+                onSelect={key => this.setKey(key)}
                 className="w-100 d-flex justify-content-center mb-4"
               >
-                <Tab eventKey="quinton" title="Quinton">
+                <Tab eventKey="1" title="Quinton">
                   <div className="row justify-content-center mb-3 ">
                     <DisplayProfileData />
                   </div>
                   <div className="row justify-content-center mb-3 ">
-                    <DisplayTableData />
+                    <DisplayMyTableData />
                   </div>
                   <DisplayRecommendation />
                 </Tab>
-                <Tab eventKey="ellen" title="Ellen">
-                  Coming soon{" "}
-                  <span role="img" aria-label="Smiley face">
-                    😊
-                  </span>
+                <Tab eventKey="2" title="Ellen">
+                  <div className="row justify-content-center mb-3 ">
+                    <DisplayEllenTableData />
+                  </div>
                 </Tab>
               </Tabs>
             )}

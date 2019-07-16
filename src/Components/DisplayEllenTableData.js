@@ -9,7 +9,7 @@ import DisplayFreeCashRow from "./SubComponents/DisplayFreeCashRow";
 import DisplayOperatingCashRow from "./SubComponents/DisplayOperatingCashRow";
 import DisplayPERow from "./SubComponents/DisplayPERow";
 
-class DisplayTableData extends React.Component {
+class DisplayEllenTableData extends React.Component {
   render() {
     if (this.props.metrics == null) {
       return null;
@@ -53,4 +53,4 @@ const mapStateToProps = state => ({
   cash: state.fetchedData.cash
 });
 
-export default connect(mapStateToProps)(DisplayTableData);
+export default connect(mapStateToProps)(DisplayEllenTableData);
