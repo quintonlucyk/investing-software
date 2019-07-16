@@ -21,28 +21,28 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.symbolRef = React.createRef();
-    let key;
-    if (window.location.href.toLowerCase().includes("ellen")) {
-      key = 2;
-    } else {
-      key = 1;
-    }
-    console.log(key);
+    // let key;
+    // if (window.location.href.toLowerCase().includes("ellen")) {
+    //   key = 2;
+    // } else {
+    //   key = 1;
+    // }
+    // console.log(key);
     this.state = {
-      noSymbolSearch: false,
-      key: key
+      noSymbolSearch: false
+      // key: key
     };
   }
 
-  setKey = key => {
-    if (key === 2) {
-      window.location.hash = "#ellen";
-    } else {
-      window.location.hash = "#";
-    }
-    console.log(window.location);
-    this.setState({ key: key });
-  };
+  // setKey = key => {
+  //   if (key === 2) {
+  //     window.location.hash = "#ellen";
+  //   } else {
+  //     window.location.hash = "#";
+  //   }
+  //   console.log(window.location);
+  //   this.setState({ key: key });
+  // };
 
   search = event => {
     event.preventDefault();
@@ -124,8 +124,9 @@ class Main extends React.Component {
             this.props.fetchedData.profile &&
             !this.props.fetchedData.profile.Error && (
               <Tabs
-                activeKey={this.state.key}
-                onSelect={key => this.setKey(key)}
+                // activeKey={this.state.key}
+                activeKey={2}
+                // onSelect={key => this.setKey(key)}
                 className="w-100 d-flex justify-content-center mb-4"
               >
                 <Tab eventKey="1" title="Quinton">
