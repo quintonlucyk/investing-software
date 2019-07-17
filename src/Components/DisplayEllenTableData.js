@@ -20,6 +20,7 @@ class DisplayEllenTableData extends React.Component {
       this.props.cash.Error === undefined
     ) {
       let tbody = [];
+      let date;
       for (let i = 0; i < 10; ++i) {
         console.log(this.props.metrics.metrics[i]);
         console.log(this.props.balance.financials[i]);
@@ -37,9 +38,10 @@ class DisplayEllenTableData extends React.Component {
             this.props.income.financials[i].date ===
               this.props.cash.financials[i].date)
         ) {
+          date = this.props.cash.financials[i].date.substring(0, 4);
           tbody.push(
-            <tr>
-              <td>{this.props.cash.financials[i].date.substring(0, 4)}</td>
+            <tr key={date}>
+              <td>{date}</td>
             </tr>
           );
         } else {
