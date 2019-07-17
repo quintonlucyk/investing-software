@@ -19,25 +19,25 @@ class DisplayEllenTableData extends React.Component {
       this.props.income.Error === undefined &&
       this.props.cash.Error === undefined
     ) {
+      let tbody = [];
+      for (let i = 0; i < 10; ++i) {
+        console.log(this.props.metrics.metrics[i]);
+        console.log(this.props.balance.financials[i]);
+        console.log(this.props.income.financials[i]);
+        console.log(this.props.cash.financials[i]);
+      }
       return (
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th />
-              <th>One Year</th>
-              <th>Five Year Average</th>
-              <th>Ten Year Average</th>
+              <th>Year</th>
+              <th>Dividend</th>
+              <th>Low Share Price</th>
+              <th>Low Yield</th>
+              <th>High Yield</th>
             </tr>
           </thead>
-          <tbody>
-            <DisplayROICRow />
-            <DisplayEquityRow />
-            <DisplayEPSRow />
-            <DisplayRevenueRow />
-            <DisplayFreeCashRow />
-            <DisplayOperatingCashRow />
-            <DisplayPERow />
-          </tbody>
+          <tbody>{tbody}</tbody>
         </Table>
       );
     } else {
