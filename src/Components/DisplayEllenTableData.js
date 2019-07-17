@@ -25,6 +25,26 @@ class DisplayEllenTableData extends React.Component {
         console.log(this.props.balance.financials[i]);
         console.log(this.props.income.financials[i]);
         console.log(this.props.cash.financials[i]);
+        if (
+          this.props.metrics.metrics[i] !== undefined &&
+          this.props.balance.financials[i] !== undefined &&
+          this.props.income.financials[i] !== undefined &&
+          this.props.cash.financials[i] !== undefined &&
+          (this.props.metrics.metrics[i].date ===
+            this.props.cash.financials[i].date &&
+            this.props.balance.financials[i].date ===
+              this.props.cash.financials[i].date &&
+            this.props.income.financials[i].date ===
+              this.props.cash.financials[i].date)
+        ) {
+          tbody.push(
+            <tr>
+              <td>{this.props.cash.financials[i].date.substring(0, 4)}</td>
+            </tr>
+          );
+        } else {
+          break;
+        }
       }
       return (
         <Table striped bordered hover>
