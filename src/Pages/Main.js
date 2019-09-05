@@ -111,18 +111,16 @@ class Main extends React.Component {
             )}
           {!this.state.noSymbolSearch &&
             this.props.fetchedData.profile &&
-            this.props.fetchedData.profile.Error && (
-              <React.Fragment>
-                <p>
-                  Shoots. Looks like something went wrong. Here is the error we
-                  got:
+            Object.entries(this.props.fetchedData.profile).length === 0 && (
+              <Alert variant="danger">
+                <p className="m-0">
+                  Looks like we got an error on our side...
                 </p>
-                <p>{this.props.fetchedData.profile.Error}</p>
-              </React.Fragment>
+              </Alert>
             )}
           {!this.state.noSymbolSearch &&
             this.props.fetchedData.profile &&
-            !this.props.fetchedData.profile.Error && (
+            Object.entries(this.props.fetchedData.profile).length !== 0 && (
               <Tabs
                 // activeKey={this.state.key}
                 activeKey={2}
