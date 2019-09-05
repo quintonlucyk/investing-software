@@ -1,13 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
-import DisplayROICRow from "./SubComponents/DisplayROICRow";
-import DisplayEquityRow from "./SubComponents/DisplayEquityRow";
-import DisplayEPSRow from "./SubComponents/DisplayEPSRow";
-import DisplayRevenueRow from "./SubComponents/DisplayRevenueRow";
-import DisplayFreeCashRow from "./SubComponents/DisplayFreeCashRow";
-import DisplayOperatingCashRow from "./SubComponents/DisplayOperatingCashRow";
-import DisplayPERow from "./SubComponents/DisplayPERow";
 
 class DisplayEllenTableData extends React.Component {
   render() {
@@ -20,12 +13,15 @@ class DisplayEllenTableData extends React.Component {
       this.props.cash.Error === undefined
     ) {
       let tbody = [];
-      let date;
+      let displayDate;
+      let parsedDate;
+      let priceIndex = this.props.historicalPrice.historical.length - 1;
       for (let i = 0; i < 10; ++i) {
-        console.log(this.props.metrics.metrics[i]);
-        console.log(this.props.balance.financials[i]);
-        console.log(this.props.income.financials[i]);
-        console.log(this.props.cash.financials[i]);
+        // console.log(this.props.metrics.metrics[i]);
+        // console.log(this.props.balance.financials[i]);
+        // console.log(this.props.income.financials[i]);
+        // console.log(this.props.cash.financials[i]);
+        // console.log(this.props.historicalPrice.historical);
         if (
           this.props.metrics.metrics[i] !== undefined &&
           this.props.balance.financials[i] !== undefined &&
@@ -38,10 +34,21 @@ class DisplayEllenTableData extends React.Component {
             this.props.income.financials[i].date ===
               this.props.cash.financials[i].date)
         ) {
-          date = this.props.cash.financials[i].date.substring(0, 4);
+          displayDate = this.props.cash.financials[i].date;
+          parsedDate = new Date(this.props.cash.financials[i].date);
+          console.log(parsedDate);
+          let priceDate = new Date(
+            this.props.historicalPrice.historical[priceIndex].date
+          );
+          console.log(priceDate);
+          // console.log(priceIndex);
+          // console.log(this.props.historicalPrice.historical.length);
+          // console.log(this.props.historicalPrice.historical[priceIndex]);
+
           tbody.push(
-            <tr key={date}>
-              <td>{date}</td>
+            <tr key={displayDate}>
+              <td>{displayDate}</td>
+              <td>{this.props.income.financials[i]["Dividend per Share"]}</td>
             </tr>
           );
         } else {
@@ -52,11 +59,12 @@ class DisplayEllenTableData extends React.Component {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Year</th>
+              <th>Date</th>
               <th>Dividend</th>
               <th>Low Share Price</th>
-              <th>Low Yield</th>
               <th>High Yield</th>
+              <th>High Share Price</th>
+              <th>Low Yield</th>
             </tr>
           </thead>
           <tbody>{tbody}</tbody>
@@ -72,7 +80,8 @@ const mapStateToProps = state => ({
   metrics: state.fetchedData.metrics,
   balance: state.fetchedData.balance,
   income: state.fetchedData.income,
-  cash: state.fetchedData.cash
+  cash: state.fetchedData.cash,
+  historicalPrice: state.fetchedData.historicalPrice
 });
 
 export default connect(mapStateToProps)(DisplayEllenTableData);

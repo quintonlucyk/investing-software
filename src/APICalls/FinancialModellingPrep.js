@@ -69,3 +69,15 @@ export const growthCall = async symbol => {
     return { apiError: error };
   }
 };
+
+export const historicalPriceCall = async symbol => {
+  try {
+    const res = await fetch(
+      `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?serietype=line`
+    );
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    return { apiError: error };
+  }
+};

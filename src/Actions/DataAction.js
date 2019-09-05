@@ -10,7 +10,8 @@ import {
   balanceCall,
   incomeCall,
   cashCall,
-  growthCall
+  growthCall,
+  historicalPriceCall
 } from "../APICalls/FinancialModellingPrep";
 
 const fetchDataError = () => {
@@ -35,10 +36,19 @@ export const fetchData = symbol => async dispatch => {
   const income = await incomeCall(symbol);
   const cash = await cashCall(symbol);
   const growth = await growthCall(symbol);
+  const historicalPrice = await historicalPriceCall(symbol);
 
   if (!profile.apiError) {
     dispatch(
-      fetchDataSuccess({ profile, metrics, balance, income, cash, growth })
+      fetchDataSuccess({
+        profile,
+        metrics,
+        balance,
+        income,
+        cash,
+        growth,
+        historicalPrice
+      })
     );
   } else {
     dispatch(fetchDataError);
