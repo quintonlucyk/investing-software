@@ -15,6 +15,9 @@ class DisplayEllenTableData extends React.Component {
       let tbody = [];
       let displayDate;
       let parsedDate;
+      let priceDate;
+      let highPrice;
+      let lowPrice;
       let priceIndex = this.props.historicalPrice.historical.length - 1;
       for (let i = 0; i < 10; ++i) {
         // console.log(this.props.metrics.metrics[i]);
@@ -36,14 +39,26 @@ class DisplayEllenTableData extends React.Component {
         ) {
           displayDate = this.props.cash.financials[i].date;
           parsedDate = new Date(this.props.cash.financials[i].date);
-          console.log(parsedDate);
-          let priceDate = new Date(
+          priceDate = new Date(
             this.props.historicalPrice.historical[priceIndex].date
           );
-          console.log(priceDate);
-          // console.log(priceIndex);
-          // console.log(this.props.historicalPrice.historical.length);
-          // console.log(this.props.historicalPrice.historical[priceIndex]);
+          while (priceDate > parsedDate && priceIndex > 0) {
+            priceDate = new Date(
+              this.props.historicalPrice.historical[--priceIndex].date
+            );
+          }
+          //set parsedDate to previous (next in array) year's date to analyse the past year's data
+          if (this.props.cash.financials[i + 1] === undefined) {
+          } else {
+            parsedDate = new Date(this.props.cash.financials[i + 1].date);
+            //set high and low price
+            while (priceDate > parsedDate && priceIndex > 0) {
+              //update high and low price accordingly
+              priceDate = new Date(
+                this.props.historicalPrice.historical[--priceIndex].date
+              );
+            }
+          }
 
           tbody.push(
             <tr key={displayDate}>
