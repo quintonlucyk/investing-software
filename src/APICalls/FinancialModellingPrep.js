@@ -81,3 +81,15 @@ export const historicalPriceCall = async symbol => {
     return { apiError: error };
   }
 };
+
+export const symbolListCall = async () => {
+  try {
+    const res = await fetch(
+      `https://financialmodelingprep.com/api/v3/company/stock/list`
+    );
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    return { apiError: error };
+  }
+};

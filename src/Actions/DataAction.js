@@ -11,7 +11,8 @@ import {
   incomeCall,
   cashCall,
   growthCall,
-  historicalPriceCall
+  historicalPriceCall,
+  symbolListCall
 } from "../APICalls/FinancialModellingPrep";
 
 const fetchDataError = () => {
@@ -37,6 +38,7 @@ export const fetchData = symbol => async dispatch => {
   const cash = await cashCall(symbol);
   const growth = await growthCall(symbol);
   const historicalPrice = await historicalPriceCall(symbol);
+  const symbolList = await symbolListCall();
 
   if (!profile.apiError) {
     dispatch(
@@ -47,7 +49,8 @@ export const fetchData = symbol => async dispatch => {
         income,
         cash,
         growth,
-        historicalPrice
+        historicalPrice,
+        symbolList
       })
     );
   } else {
