@@ -18,6 +18,7 @@ class DisplayEllenTableData extends React.Component {
       let priceDate;
       let highPrice;
       let lowPrice;
+      let tempPrice;
       let priceIndex = this.props.historicalPrice.historical.length - 1;
       for (let i = 0; i < 10; ++i) {
         // console.log(this.props.metrics.metrics[i]);
@@ -47,16 +48,28 @@ class DisplayEllenTableData extends React.Component {
               this.props.historicalPrice.historical[--priceIndex].date
             );
           }
-          //set parsedDate to previous (next in array) year's date to analyse the past year's data
+
           if (this.props.cash.financials[i + 1] === undefined) {
           } else {
+            //set parsedDate to previous (next in array) year's date to analyse the past year's data
             parsedDate = new Date(this.props.cash.financials[i + 1].date);
+            tempPrice = this.props.historicalPrice.historical[priceIndex].close;
+            highPrice = tempPrice;
+            lowPrice = tempPrice;
             //set high and low price
             while (priceDate > parsedDate && priceIndex > 0) {
               //update high and low price accordingly
               priceDate = new Date(
                 this.props.historicalPrice.historical[--priceIndex].date
               );
+              tempPrice = this.props.historicalPrice.historical[priceIndex]
+                .close;
+              if (tempPrice < lowPrice) {
+                lowPrice = tempPrice;
+              }
+              if (tempPrice > highPrice) {
+                highPrice = tempPrice;
+              }
             }
           }
 
@@ -64,6 +77,20 @@ class DisplayEllenTableData extends React.Component {
             <tr key={displayDate}>
               <td>{displayDate}</td>
               <td>{this.props.income.financials[i]["Dividend per Share"]}</td>
+              <td>{lowPrice}</td>
+              <td>
+                {(
+                  this.props.income.financials[i]["Dividend per Share"] /
+                  lowPrice
+                ).toFixed(4)}
+              </td>
+              <td>{highPrice}</td>
+              <td>
+                {(
+                  this.props.income.financials[i]["Dividend per Share"] /
+                  highPrice
+                ).toFixed(4)}
+              </td>
             </tr>
           );
         } else {
