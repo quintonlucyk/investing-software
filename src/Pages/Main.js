@@ -113,20 +113,13 @@ class Main extends React.Component {
             this.props.fetchedData.profile &&
             Object.entries(this.props.fetchedData.profile).length === 0 && (
               <Alert variant="danger">
-                <p className="m-0">
-                  Looks like we got an error on our side...
-                </p>
+                <p className="m-0">Looks like we got an error on our side...</p>
               </Alert>
             )}
           {!this.state.noSymbolSearch &&
             this.props.fetchedData.profile &&
             Object.entries(this.props.fetchedData.profile).length !== 0 && (
-              <Tabs
-                // activeKey={this.state.key}
-                activeKey={2}
-                // onSelect={key => this.setKey(key)}
-                className="w-100 d-flex justify-content-center mb-4"
-              >
+              <Tabs className="w-100 d-flex justify-content-center mb-4">
                 <Tab eventKey="1" title="Quinton">
                   <div className="row justify-content-center mb-3 ">
                     <DisplayProfileData />
