@@ -15,6 +15,8 @@ import {
   symbolListCall
 } from "../APICalls/FinancialModellingPrep";
 
+import { historicalAdjustedCall } from "../APICalls/AlphaVantage";
+
 const fetchDataError = () => {
   return { type: FETCH_DATA_ERROR };
 };
@@ -39,6 +41,7 @@ export const fetchData = symbol => async dispatch => {
   const growth = await growthCall(symbol);
   const historicalPrice = await historicalPriceCall(symbol);
   const symbolList = await symbolListCall();
+  const historicalAdjusted = await historicalAdjustedCall(symbol);
 
   if (!profile.apiError) {
     dispatch(
@@ -50,7 +53,8 @@ export const fetchData = symbol => async dispatch => {
         cash,
         growth,
         historicalPrice,
-        symbolList
+        symbolList,
+        historicalAdjusted
       })
     );
   } else {

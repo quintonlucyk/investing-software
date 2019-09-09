@@ -4,14 +4,9 @@ import { connect } from "react-redux";
 
 class DisplayEllenTableData extends React.Component {
   render() {
-    if (this.props.metrics == null) {
+    if (this.props.historicalAdjusted == null) {
       return null;
-    } else if (
-      this.props.metrics.Error === undefined &&
-      this.props.balance.Error === undefined &&
-      this.props.income.Error === undefined &&
-      this.props.cash.Error === undefined
-    ) {
+    } else if (this.props.historicalAdjusted.Error === undefined) {
       let tbody = [];
       let displayDate;
       let parsedDate;
@@ -21,11 +16,9 @@ class DisplayEllenTableData extends React.Component {
       let tempPrice;
       let priceIndex = this.props.historicalPrice.historical.length - 1;
       for (let i = 0; i < 10; ++i) {
-        // console.log(this.props.metrics.metrics[i]);
-        // console.log(this.props.balance.financials[i]);
-        // console.log(this.props.income.financials[i]);
-        // console.log(this.props.cash.financials[i]);
-        // console.log(this.props.historicalPrice.historical);
+        // for (let tempval in historicalAdjusted[]) come up with new traverse here
+
+        console.log(this.props.historicalAdjusted.historicalAdjusted[i]);
         if (
           this.props.metrics.metrics[i] !== undefined &&
           this.props.balance.financials[i] !== undefined &&
@@ -123,7 +116,8 @@ const mapStateToProps = state => ({
   balance: state.fetchedData.balance,
   income: state.fetchedData.income,
   cash: state.fetchedData.cash,
-  historicalPrice: state.fetchedData.historicalPrice
+  historicalPrice: state.fetchedData.historicalPrice,
+  historicalAdjusted: state.fetchedData.historicalAdjusted
 });
 
 export default connect(mapStateToProps)(DisplayEllenTableData);
