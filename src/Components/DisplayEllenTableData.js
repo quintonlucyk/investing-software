@@ -7,7 +7,7 @@ class DisplayEllenTableData extends React.Component {
     if (this.props.historicalAdjusted == null) {
       return null;
     } else if (this.props.historicalAdjusted.Error === undefined) {
-      let tbody = new Array(10);
+      let tbody = new Array(11);
       for (let entry of tbody) {
         entry = new Array(6);
       }
@@ -31,6 +31,8 @@ class DisplayEllenTableData extends React.Component {
           break;
         } else {
           let entryInArray = tempYearOfDate - tempval.substring(0, 4);
+          console.log(entryInArray);
+          console.log(tbody.length);
         }
         console.log(tempval);
       }
