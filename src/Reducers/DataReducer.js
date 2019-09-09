@@ -12,7 +12,10 @@ const initialState = {
   balance: null,
   income: null,
   cash: null,
-  growth: null
+  growth: null,
+  historicalPrice: null,
+  symbolList: null,
+  historicalAdjusted: null
 };
 
 export default function(state = initialState, action) {
