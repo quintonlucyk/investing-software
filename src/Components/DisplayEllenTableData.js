@@ -7,23 +7,30 @@ class DisplayEllenTableData extends React.Component {
     if (this.props.historicalAdjusted == null) {
       return null;
     } else if (this.props.historicalAdjusted.Error === undefined) {
-      let tbody = [];
-      let displayDate;
-      let parsedDate;
-      let priceDate;
-      let highPrice;
-      let lowPrice;
-      let tempPrice;
-      let tempYearDate = new Date();
-      tempYearDate = tempYearDate.getYear() + 1900;
-      // for (let i = tempYearDate; i > tempYearDate - 11; --i) {
+      let tbody = new Array(10);
+      for (let entry of tbody) {
+        entry = new Array(6);
+      }
+      /**
+       * tbody will follow structure as such:
+       * [[date, dividend, low share, high yield, high share, low yield],
+       * .
+       * .
+       * .
+       * [date, dividend, low share, high yield, high share, low yield]]
+       *
+       */
+      let tempYearOfDate = new Date();
+      tempYearOfDate = tempYearOfDate.getYear() + 1900;
       for (let tempval in this.props.historicalAdjusted[
         "Time Series (Daily)"
       ]) {
         // come up with new traverse here
 
-        if (tempval.substring(0, 4) < tempYearDate - 10) {
+        if (tempval.substring(0, 4) < tempYearOfDate - 10) {
           break;
+        } else {
+          let entryInArray = tempYearOfDate - tempval.substring(0, 4);
         }
         console.log(tempval);
       }
