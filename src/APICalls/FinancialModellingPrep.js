@@ -1,7 +1,7 @@
 export const profileCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/company/profile/${symbol}`
+      `https://financialmodelingprep.com/api/v3/company/profile/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -13,7 +13,7 @@ export const profileCall = async symbol => {
 export const metricsCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/company-key-metrics/${symbol}`
+      `https://financialmodelingprep.com/api/v3/company-key-metrics/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -25,7 +25,7 @@ export const metricsCall = async symbol => {
 export const balanceCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/${symbol}`
+      `https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -37,7 +37,7 @@ export const balanceCall = async symbol => {
 export const incomeCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financials/income-statement/${symbol}`
+      `https://financialmodelingprep.com/api/v3/financials/income-statement/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -49,7 +49,7 @@ export const incomeCall = async symbol => {
 export const cashCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financials/cash-flow-statement/${symbol}`
+      `https://financialmodelingprep.com/api/v3/financials/cash-flow-statement/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -61,7 +61,7 @@ export const cashCall = async symbol => {
 export const growthCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financial-statement-growth/${symbol}`
+      `https://financialmodelingprep.com/api/v3/financial-statement-growth/${symbol}?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -73,7 +73,7 @@ export const growthCall = async symbol => {
 export const historicalPriceCall = async symbol => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?serietype=line`
+      `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?serietype=line&apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
@@ -85,7 +85,7 @@ export const historicalPriceCall = async symbol => {
 export const symbolListCall = async () => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/company/stock/list`
+      `https://financialmodelingprep.com/api/v3/company/stock/list?apikey=103ee186f7bdcdfdfbafccd56178d7c9`
     );
     const json = await res.json();
     return json;
