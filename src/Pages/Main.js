@@ -7,11 +7,12 @@ import {
   Popover,
   Alert,
   Tabs,
-  Tab
+  Tab,
 } from "react-bootstrap";
 import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayMyTableData from "../Components/DisplayMyTableData";
 import DisplayEllenTableData from "../Components/DisplayEllenTableData";
+import DisplayPicks from "../Components/DisplayPicks";
 import DisplayRecommendation from "../Components/DisplayRecommendation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
@@ -21,30 +22,12 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.symbolRef = React.createRef();
-    // let key;
-    // if (window.location.href.toLowerCase().includes("ellen")) {
-    //   key = 2;
-    // } else {
-    //   key = 1;
-    // }
-    // console.log(key);
     this.state = {
-      noSymbolSearch: false
-      // key: key
+      noSymbolSearch: false,
     };
   }
 
-  // setKey = key => {
-  //   if (key === 2) {
-  //     window.location.hash = "#ellen";
-  //   } else {
-  //     window.location.hash = "#";
-  //   }
-  //   console.log(window.location);
-  //   this.setState({ key: key });
-  // };
-
-  search = event => {
+  search = (event) => {
     event.preventDefault();
     if (this.symbolRef.current.value !== "") {
       this.setState({ noSymbolSearch: false });
@@ -129,7 +112,12 @@ class Main extends React.Component {
                   </div>
                   <DisplayRecommendation />
                 </Tab>
-                <Tab eventKey="2" title="Ellen">
+                <Tab eventKey="2" title="Picks">
+                  <div className="row justify-content-center mb-3 ">
+                    <DisplayPicks />
+                  </div>
+                </Tab>
+                <Tab eventKey="3" title="Ellen">
                   <div className="row justify-content-center mb-3 ">
                     <DisplayEllenTableData />
                   </div>
@@ -142,11 +130,8 @@ class Main extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  fetchedData: state.fetchedData
+const mapStateToProps = (state) => ({
+  fetchedData: state.fetchedData,
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchData }
-)(Main);
+export default connect(mapStateToProps, { fetchData })(Main);
