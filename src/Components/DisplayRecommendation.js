@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class DisplayRecommendation extends React.Component {
   render() {
-    if (this.props.metrics == null) {
+    if (this.props.metrics == null || this.props.metrics.metrics == null) {
       return null;
     } else if (
       this.props.profile.Error === undefined &&
@@ -14,12 +14,6 @@ class DisplayRecommendation extends React.Component {
       this.props.cash.Error === undefined &&
       this.props.growth.Error === undefined
     ) {
-      console.log(this.props.profile);
-      console.log(this.props.metrics);
-      console.log(this.props.balance);
-      console.log(this.props.income);
-      console.log(this.props.cash);
-      console.log(this.props.growth);
       const price = parseFloat(this.props.profile.profile.price);
 
       let grahamAlert = null;
@@ -131,24 +125,19 @@ class DisplayRecommendation extends React.Component {
         </React.Fragment>
       );
     } else {
-      console.log(this.props.profile);
-      console.log(this.props.metrics);
-      console.log(this.props.balance);
-      console.log(this.props.income);
-      console.log(this.props.cash);
       return null;
     }
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.fetchedData.profile,
   metrics: state.fetchedData.metrics,
   balance: state.fetchedData.balance,
   income: state.fetchedData.income,
   cash: state.fetchedData.cash,
   growth: state.fetchedData.growth,
-  minPE: state.minPE
+  minPE: state.minPE,
 });
 
 export default connect(mapStateToProps)(DisplayRecommendation);

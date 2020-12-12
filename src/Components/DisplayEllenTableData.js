@@ -92,7 +92,6 @@ class DisplayEllenTableData extends React.Component {
       //     }
       //   }
       // }
-      // console.log(tbody);
 
       // for (let )
       // if (

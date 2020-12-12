@@ -1,7 +1,7 @@
 import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_ERROR,
-  FETCH_DATA_STARTED
+  FETCH_DATA_STARTED,
 } from "./Types";
 
 import {
@@ -12,7 +12,6 @@ import {
   cashCall,
   growthCall,
   historicalPriceCall,
-  symbolListCall
 } from "../APICalls/FinancialModellingPrep";
 
 import { historicalAdjustedCall } from "../APICalls/AlphaVantage";
@@ -25,12 +24,12 @@ const fetchDataStarted = () => {
   return { type: FETCH_DATA_STARTED };
 };
 
-const fetchDataSuccess = data => {
+const fetchDataSuccess = (data) => {
   return { type: FETCH_DATA_SUCCESS, payload: data };
 };
 
 //start fetch
-export const fetchData = symbol => async dispatch => {
+export const fetchData = (symbol) => async (dispatch) => {
   dispatch(fetchDataStarted());
 
   const profile = await profileCall(symbol);
@@ -40,7 +39,6 @@ export const fetchData = symbol => async dispatch => {
   const cash = await cashCall(symbol);
   const growth = await growthCall(symbol);
   const historicalPrice = await historicalPriceCall(symbol);
-  const symbolList = await symbolListCall();
   const historicalAdjusted = await historicalAdjustedCall(symbol);
 
   if (!profile.apiError) {
@@ -53,8 +51,7 @@ export const fetchData = symbol => async dispatch => {
         cash,
         growth,
         historicalPrice,
-        symbolList,
-        historicalAdjusted
+        historicalAdjusted,
       })
     );
   } else {

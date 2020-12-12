@@ -11,7 +11,7 @@ import DisplayPERow from "./SubComponents/DisplayPERow";
 
 class DisplayMyTableData extends React.Component {
   render() {
-    if (this.props.metrics == null) {
+    if (this.props.metrics == null || this.props.metrics.metrics == null) {
       return null;
     } else if (
       this.props.metrics.Error === undefined &&
@@ -46,11 +46,11 @@ class DisplayMyTableData extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   metrics: state.fetchedData.metrics,
   balance: state.fetchedData.balance,
   income: state.fetchedData.income,
-  cash: state.fetchedData.cash
+  cash: state.fetchedData.cash,
 });
 
 export default connect(mapStateToProps)(DisplayMyTableData);

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 class DisplayProfileData extends React.Component {
   render() {
-    if (this.props.profile == null) {
+    if (this.props.profile == null || this.props.profile.profile == null) {
       return null;
     } else if (this.props.profile.Error === undefined) {
       return (
@@ -26,8 +26,8 @@ class DisplayProfileData extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  profile: state.fetchedData.profile
+const mapStateToProps = (state) => ({
+  profile: state.fetchedData.profile,
 });
 
 export default connect(mapStateToProps)(DisplayProfileData);

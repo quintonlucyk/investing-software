@@ -17,6 +17,7 @@ import DisplayRecommendation from "../Components/DisplayRecommendation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { fetchData } from "../Actions/DataAction";
+import { fetchPickData } from "../Actions/PickDataAction";
 
 class Main extends React.Component {
   constructor(props) {
@@ -25,6 +26,10 @@ class Main extends React.Component {
     this.state = {
       noSymbolSearch: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchPickData();
   }
 
   search = (event) => {
@@ -72,6 +77,33 @@ class Main extends React.Component {
             </ButtonToolbar>
           </Form>
         </div>
+        <Tabs className="w-100 d-flex justify-content-center mb-4">
+          <Tab eventKey="1" title="Quinton">
+            <div className="row justify-content-center mb-3 ">
+              <DisplayProfileData />
+            </div>
+            <div className="row justify-content-center mb-3 ">
+              <div className="col-xl-8 text-center">
+                <DisplayMyTableData />
+              </div>
+            </div>
+            <DisplayRecommendation />
+          </Tab>
+          <Tab eventKey="2" title="Picks">
+            <div className="row justify-content-center mb-3 ">
+              <div className="col-xl-8 text-center">
+                <DisplayPicks />
+              </div>
+            </div>
+          </Tab>
+          <Tab eventKey="3" title="Ellen">
+            <div className="row justify-content-center mb-3 ">
+              <div className="col-xl-8 text-center">
+                <DisplayEllenTableData />
+              </div>
+            </div>
+          </Tab>
+        </Tabs>
         <div className="row justify-content-center m-4">
           {this.state.noSymbolSearch && (
             <Alert variant="danger">
@@ -99,31 +131,6 @@ class Main extends React.Component {
                 <p className="m-0">Looks like we got an error on our side...</p>
               </Alert>
             )}
-          {!this.state.noSymbolSearch &&
-            this.props.fetchedData.profile &&
-            Object.entries(this.props.fetchedData.profile).length !== 0 && (
-              <Tabs className="w-100 d-flex justify-content-center mb-4">
-                <Tab eventKey="1" title="Quinton">
-                  <div className="row justify-content-center mb-3 ">
-                    <DisplayProfileData />
-                  </div>
-                  <div className="row justify-content-center mb-3 ">
-                    <DisplayMyTableData />
-                  </div>
-                  <DisplayRecommendation />
-                </Tab>
-                <Tab eventKey="2" title="Picks">
-                  <div className="row justify-content-center mb-3 ">
-                    <DisplayPicks />
-                  </div>
-                </Tab>
-                <Tab eventKey="3" title="Ellen">
-                  <div className="row justify-content-center mb-3 ">
-                    <DisplayEllenTableData />
-                  </div>
-                </Tab>
-              </Tabs>
-            )}
         </div>
       </div>
     );
@@ -134,4 +141,4 @@ const mapStateToProps = (state) => ({
   fetchedData: state.fetchedData,
 });
 
-export default connect(mapStateToProps, { fetchData })(Main);
+export default connect(mapStateToProps, { fetchData, fetchPickData })(Main);

@@ -7,6 +7,8 @@ const initialState = {
   fetchedData: {
     error: false,
     loading: false,
+    pickError: false,
+    pickLoading: false,
     profile: null,
     metrics: null,
     balance: null,
@@ -15,9 +17,9 @@ const initialState = {
     growth: null,
     historicalPrice: null,
     symbolList: null,
-    historicalAdjusted: null
+    historicalAdjusted: null,
   },
-  minPE: null
+  minPE: null,
 };
 
 const middleware = [thunk];
