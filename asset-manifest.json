@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/investing-software/static/css/main.aa9c38e3.chunk.css",
-    "main.js": "/investing-software/static/js/main.85a53e2a.chunk.js",
-    "main.js.map": "/investing-software/static/js/main.85a53e2a.chunk.js.map",
-    "runtime~main.js": "/investing-software/static/js/runtime~main.863e9e57.js",
-    "runtime~main.js.map": "/investing-software/static/js/runtime~main.863e9e57.js.map",
-    "static/js/2.ed31e573.chunk.js": "/investing-software/static/js/2.ed31e573.chunk.js",
-    "static/js/2.ed31e573.chunk.js.map": "/investing-software/static/js/2.ed31e573.chunk.js.map",
+    "main.css": "/investing-software/static/css/main.c23ba020.chunk.css",
+    "main.js": "/investing-software/static/js/main.7f4f926e.chunk.js",
+    "main.js.map": "/investing-software/static/js/main.7f4f926e.chunk.js.map",
+    "runtime-main.js": "/investing-software/static/js/runtime-main.6b278c7e.js",
+    "runtime-main.js.map": "/investing-software/static/js/runtime-main.6b278c7e.js.map",
+    "static/js/2.1cfb7317.chunk.js": "/investing-software/static/js/2.1cfb7317.chunk.js",
+    "static/js/2.1cfb7317.chunk.js.map": "/investing-software/static/js/2.1cfb7317.chunk.js.map",
     "index.html": "/investing-software/index.html",
-    "precache-manifest.fe1490c1d46363a49606fc17264f6f67.js": "/investing-software/precache-manifest.fe1490c1d46363a49606fc17264f6f67.js",
-    "service-worker.js": "/investing-software/service-worker.js",
-    "static/css/main.aa9c38e3.chunk.css.map": "/investing-software/static/css/main.aa9c38e3.chunk.css.map"
-  }
+    "static/css/main.c23ba020.chunk.css.map": "/investing-software/static/css/main.c23ba020.chunk.css.map",
+    "static/js/2.1cfb7317.chunk.js.LICENSE.txt": "/investing-software/static/js/2.1cfb7317.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6b278c7e.js",
+    "static/js/2.1cfb7317.chunk.js",
+    "static/css/main.c23ba020.chunk.css",
+    "static/js/main.7f4f926e.chunk.js"
+  ]
 }
