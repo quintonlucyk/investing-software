@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class DisplayRecommendation extends React.Component {
   render() {
-    if (this.props.metrics == null || this.props.metrics.metrics == null) {
+    if (this.props.metrics?.metrics == null) {
       return null;
     } else if (
       this.props.profile.Error === undefined &&

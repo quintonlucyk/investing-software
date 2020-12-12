@@ -84,7 +84,7 @@ export const historicalPriceCall = async (symbol) => {
   }
 };
 
-export const symbolListCall = async () => {
+export const symbolsListCall = async () => {
   try {
     const res = await fetch(
       `https://financialmodelingprep.com/api/v3/company/stock/list?apikey=${API_KEY}`

@@ -17,7 +17,7 @@ const initialState = {
   historicalAdjusted: null,
 };
 
-export default function (state = initialState, action) {
+export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       return {
@@ -39,4 +39,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default dataReducer;

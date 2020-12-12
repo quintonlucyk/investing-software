@@ -3,8 +3,10 @@ import {
   FETCH_PICK_DATA_ERROR,
   FETCH_PICK_DATA_STARTED,
 } from "./Types";
+// import { symbolsListCall } from "../APICalls/FinancialModellingPrep";
+import { SampleFinSymbolsList } from "../APICalls/SampleFinSymbolsList";
 
-import { symbolListCall } from "../APICalls/FinancialModellingPrep";
+// const inDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 const fetchPickDataError = () => {
   return { type: FETCH_PICK_DATA_ERROR };
@@ -20,12 +22,13 @@ const fetchPickDataSuccess = (data) => {
 
 export const fetchPickData = () => async (dispatch) => {
   dispatch(fetchPickDataStarted());
-  const symbolList = await symbolListCall();
+  // const symbolsList = inDev ? SampleFinSymbolsList : await symbolsListCall();
+  const symbolsList = SampleFinSymbolsList;
 
-  if (!symbolList.apiError) {
+  if (!symbolsList.apiError) {
     dispatch(
       fetchPickDataSuccess({
-        symbolList,
+        symbolsList,
       })
     );
   } else {

@@ -21,7 +21,7 @@ const initialState = {
   fetchedPickData: {
     pickError: false,
     pickLoading: false,
-    symbolList: null,
+    symbolsList: null,
   },
   minPE: null,
 };

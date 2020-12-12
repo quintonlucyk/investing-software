@@ -11,7 +11,7 @@ import DisplayPERow from "./SubComponents/DisplayPERow";
 
 class DisplayMyTableData extends React.Component {
   render() {
-    if (this.props.metrics == null || this.props.metrics.metrics == null) {
+    if (this.props.metrics?.metrics == null) {
       return null;
     } else if (
       this.props.metrics.Error === undefined &&

@@ -7,16 +7,25 @@ import {
 const initialState = {
   pickError: false,
   pickLoading: false,
-  symbolList: null,
+  symbolsList: null,
 };
 
-export default function (state = initialState, action) {
+const pickDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PICK_DATA_SUCCESS:
+      let symbolsList = "";
+      action.payload.symbolsList.symbolsList.forEach((entry) => {
+        if (entry.symbol) {
+          symbolsList += entry.symbol + ",";
+        }
+      });
+      if (symbolsList.length > 0) {
+        symbolsList = symbolsList.slice(0, -1); //Take of trailing comma
+      }
       return {
         ...state,
         pickLoading: false,
-        ...action.payload,
+        symbolsList: symbolsList,
       };
     case FETCH_PICK_DATA_STARTED:
       return {
@@ -32,4 +41,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default pickDataReducer;

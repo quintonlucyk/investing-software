@@ -66,9 +66,6 @@ class Main extends React.Component {
                 overlay={
                   <Popover id="popover-basic" title="What is this all about?">
                     Good things come to those who wait.
-                    <span role="img" aria-label="Smiley face">
-                      😊
-                    </span>
                   </Popover>
                 }
               >
@@ -139,6 +136,7 @@ class Main extends React.Component {
 
 const mapStateToProps = (state) => ({
   fetchedData: state.fetchedData,
+  fetchedPickData: state.fetchedPickData,
 });
 
 export default connect(mapStateToProps, { fetchData, fetchPickData })(Main);

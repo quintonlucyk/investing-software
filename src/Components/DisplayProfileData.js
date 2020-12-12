@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 class DisplayProfileData extends React.Component {
   render() {
-    if (this.props.profile == null || this.props.profile.profile == null) {
+    if (this.props.profile?.profile == null) {
       return null;
     } else if (this.props.profile.Error === undefined) {
       return (
