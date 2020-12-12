@@ -16,8 +16,12 @@ const initialState = {
     cash: null,
     growth: null,
     historicalPrice: null,
-    symbolList: null,
     historicalAdjusted: null,
+  },
+  fetchedPickData: {
+    pickError: false,
+    pickLoading: false,
+    symbolList: null,
   },
   minPE: null,
 };
