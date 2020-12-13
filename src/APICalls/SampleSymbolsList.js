@@ -1,4 +1,4 @@
-export const SampleFinSymbolsList = {
+export const SampleSymbolsList = {
   symbolsList: [
     {
       symbol: "SPY",

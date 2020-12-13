@@ -17,7 +17,7 @@ import DisplayRecommendation from "../Components/DisplayRecommendation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { fetchData } from "../Actions/DataAction";
-import { fetchPickData } from "../Actions/PickDataAction";
+import { fetchPickData, fetchPickBatch } from "../Actions/PickDataAction";
 
 class Main extends React.Component {
   constructor(props) {
@@ -30,6 +30,22 @@ class Main extends React.Component {
 
   componentDidMount() {
     this.props.fetchPickData();
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      fetchedPickData: { symbolsList: prevSymbolsList },
+    } = prevProps;
+    const { fetchedPickData } = this.props;
+    const { pickError, pickLoading, symbolsList } = fetchedPickData;
+    if (
+      !pickError &&
+      !pickLoading &&
+      symbolsList?.length > 0 &&
+      symbolsList !== prevSymbolsList
+    ) {
+      this.props.fetchPickBatch(symbolsList);
+    }
   }
 
   search = (event) => {
@@ -139,4 +155,8 @@ const mapStateToProps = (state) => ({
   fetchedPickData: state.fetchedPickData,
 });
 
-export default connect(mapStateToProps, { fetchData, fetchPickData })(Main);
+export default connect(mapStateToProps, {
+  fetchData,
+  fetchPickData,
+  fetchPickBatch,
+})(Main);

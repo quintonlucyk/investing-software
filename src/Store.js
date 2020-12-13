@@ -23,6 +23,11 @@ const initialState = {
     pickLoading: false,
     symbolsList: null,
   },
+  fetchedPickBatch: {
+    batchError: false,
+    batchLoading: false,
+    batchData: null,
+  },
   minPE: null,
 };
 

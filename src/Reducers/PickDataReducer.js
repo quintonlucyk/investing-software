@@ -15,7 +15,7 @@ const pickDataReducer = (state = initialState, action) => {
     case FETCH_PICK_DATA_SUCCESS:
       let symbolsList = "";
       action.payload.symbolsList.symbolsList.forEach((entry) => {
-        if (entry.symbol) {
+        if (entry.symbol && /^[A-Za-z]+$/.test(entry.symbol)) {
           symbolsList += entry.symbol + ",";
         }
       });

@@ -95,3 +95,15 @@ export const symbolsListCall = async () => {
     return { apiError: error };
   }
 };
+
+export const batchCall = async (symbols) => {
+  try {
+    const res = await fetch(
+      `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${API_KEY}`
+    );
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    return { apiError: error };
+  }
+};
