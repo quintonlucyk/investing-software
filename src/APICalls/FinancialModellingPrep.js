@@ -1,5 +1,6 @@
 const API_KEY = process.env.REACT_APP_STOCK_API_KEY;
 const API_KEY_TWO = process.env.REACT_APP_STOCK_API_KEY_TWO;
+const API_KEY_THREE = process.env.REACT_APP_STOCK_API_KEY_THREE;
 
 export const profileCall = async (symbol) => {
   try {
@@ -28,7 +29,7 @@ export const metricsCall = async (symbol) => {
 export const balanceCall = async (symbol) => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/${symbol}?apikey=${API_KEY}`
+      `https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/${symbol}?apikey=${API_KEY_THREE}`
     );
     const json = await res.json();
     return json;
@@ -40,7 +41,7 @@ export const balanceCall = async (symbol) => {
 export const incomeCall = async (symbol) => {
   try {
     const res = await fetch(
-      `https://financialmodelingprep.com/api/v3/financials/income-statement/${symbol}?apikey=${API_KEY_TWO}`
+      `https://financialmodelingprep.com/api/v3/financials/income-statement/${symbol}?apikey=${API_KEY_THREE}`
     );
     const json = await res.json();
     return json;
