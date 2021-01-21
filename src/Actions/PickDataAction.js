@@ -6,10 +6,10 @@ import {
   FETCH_PICK_BATCH_ERROR,
   FETCH_PICK_BATCH_STARTED,
 } from "./Types";
-import { symbolsListCall } from "../APICalls/FinancialModellingPrep"; //batchCall
+// import { symbolsListCall } from "../APICalls/FinancialModellingPrep"; //batchCall
 import { SampleSymbolsList } from "../APICalls/SampleSymbolsList";
 
-const inDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+// const inDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 const fetchPickDataError = () => {
   return { type: FETCH_PICK_DATA_ERROR };
@@ -25,7 +25,7 @@ const fetchPickDataSuccess = (data) => {
 
 export const fetchPickData = () => async (dispatch) => {
   dispatch(fetchPickDataStarted());
-  const symbolsList = inDev ? SampleSymbolsList : await symbolsListCall();
+  const symbolsList = SampleSymbolsList; // Taking it out as it doesn't work
 
   if (!symbolsList.apiError) {
     dispatch(
