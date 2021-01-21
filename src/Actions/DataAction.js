@@ -11,10 +11,10 @@ import {
   incomeCall,
   cashCall,
   growthCall,
-  historicalPriceCall,
+  //   historicalPriceCall,
 } from "../APICalls/FinancialModellingPrep";
 
-import { historicalAdjustedCall } from "../APICalls/AlphaVantage";
+// import { historicalAdjustedCall } from "../APICalls/AlphaVantage";
 
 const fetchDataError = () => {
   return { type: FETCH_DATA_ERROR };
@@ -38,8 +38,8 @@ export const fetchData = (symbol) => async (dispatch) => {
   const income = await incomeCall(symbol);
   const cash = await cashCall(symbol);
   const growth = await growthCall(symbol);
-  const historicalPrice = await historicalPriceCall(symbol);
-  const historicalAdjusted = await historicalAdjustedCall(symbol);
+  //   const historicalPrice = await historicalPriceCall(symbol);
+  //   const historicalAdjusted = await historicalAdjustedCall(symbol);
 
   if (!profile.apiError) {
     dispatch(
@@ -50,8 +50,8 @@ export const fetchData = (symbol) => async (dispatch) => {
         income,
         cash,
         growth,
-        historicalPrice,
-        historicalAdjusted,
+        // historicalPrice,
+        // historicalAdjusted,
       })
     );
   } else {
