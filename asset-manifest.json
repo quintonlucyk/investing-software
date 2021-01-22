@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/investing-software/static/css/main.c23ba020.chunk.css",
-    "main.js": "/investing-software/static/js/main.e5883982.chunk.js",
-    "main.js.map": "/investing-software/static/js/main.e5883982.chunk.js.map",
+    "main.js": "/investing-software/static/js/main.c65f709d.chunk.js",
+    "main.js.map": "/investing-software/static/js/main.c65f709d.chunk.js.map",
     "runtime-main.js": "/investing-software/static/js/runtime-main.6b278c7e.js",
     "runtime-main.js.map": "/investing-software/static/js/runtime-main.6b278c7e.js.map",
-    "static/js/2.8ea1fe2e.chunk.js": "/investing-software/static/js/2.8ea1fe2e.chunk.js",
-    "static/js/2.8ea1fe2e.chunk.js.map": "/investing-software/static/js/2.8ea1fe2e.chunk.js.map",
+    "static/js/2.5adb261b.chunk.js": "/investing-software/static/js/2.5adb261b.chunk.js",
+    "static/js/2.5adb261b.chunk.js.map": "/investing-software/static/js/2.5adb261b.chunk.js.map",
     "index.html": "/investing-software/index.html",
     "static/css/main.c23ba020.chunk.css.map": "/investing-software/static/css/main.c23ba020.chunk.css.map",
-    "static/js/2.8ea1fe2e.chunk.js.LICENSE.txt": "/investing-software/static/js/2.8ea1fe2e.chunk.js.LICENSE.txt"
+    "static/js/2.5adb261b.chunk.js.LICENSE.txt": "/investing-software/static/js/2.5adb261b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6b278c7e.js",
-    "static/js/2.8ea1fe2e.chunk.js",
+    "static/js/2.5adb261b.chunk.js",
     "static/css/main.c23ba020.chunk.css",
-    "static/js/main.e5883982.chunk.js"
+    "static/js/main.c65f709d.chunk.js"
   ]
 }
