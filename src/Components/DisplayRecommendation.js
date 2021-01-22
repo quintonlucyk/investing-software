@@ -49,69 +49,90 @@ class DisplayRecommendation extends React.Component {
         this.props.income.financials[0].EPS &&
         this.props.growth.growth[0]
       ) {
-        const eps = parseFloat(this.props.income.financials[0].EPS);
-        const tenYearGrowth = this.props.growth.growth[0][
-          "10Y Shareholders Equity Growth (per Share)"
-        ];
-        const fiveYearGrowth = this.props.growth.growth[0][
-          "5Y Shareholders Equity Growth (per Share)"
-        ];
-        const threeYearGrowth = this.props.growth.growth[0][
-          "3Y Shareholders Equity Growth (per Share)"
-        ];
+        var eps = parseFloat(this.props.income.financials[0].EPS);
+        let tenYearGrowth =
+          parseFloat(
+            this.props.growth.growth[0][
+              "10Y Shareholders Equity Growth (per Share)"
+            ]
+          ) || undefined;
+
+        let fiveYearGrowth =
+          parseFloat(
+            this.props.growth.growth[0][
+              "5Y Shareholders Equity Growth (per Share)"
+            ]
+          ) || undefined;
+
+        let threeYearGrowth =
+          parseFloat(
+            this.props.growth.growth[0][
+              "3Y Shareholders Equity Growth (per Share)"
+            ]
+          ) || undefined;
+        tenYearGrowth =
+          tenYearGrowth > 0
+            ? Math.pow(1 + tenYearGrowth, 1 / 10) - 1
+            : tenYearGrowth;
+        fiveYearGrowth =
+          fiveYearGrowth > 0
+            ? Math.pow(1 + fiveYearGrowth, 1 / 5) - 1
+            : fiveYearGrowth;
+        threeYearGrowth =
+          threeYearGrowth > 0
+            ? Math.pow(1 + threeYearGrowth, 1 / 3) - 1
+            : threeYearGrowth;
+
         var equityGrowthData = [];
         if (tenYearGrowth) {
-          equityGrowthData.unshift(
-            `10Y: ${parseFloat(tenYearGrowth).toFixed(2)}`
-          );
-          minGrowth = parseFloat(tenYearGrowth);
+          equityGrowthData.unshift(`10Y: ${tenYearGrowth.toFixed(2)}`);
+          minGrowth = tenYearGrowth;
           growthInterval = 10;
         }
         if (fiveYearGrowth) {
-          equityGrowthData.unshift(
-            `5Y: ${parseFloat(fiveYearGrowth).toFixed(2)}`
-          );
+          equityGrowthData.unshift(`5Y: ${fiveYearGrowth.toFixed(2)}`);
           minGrowth =
             minGrowth !== undefined
-              ? Math.min(minGrowth, parseFloat(fiveYearGrowth))
-              : parseFloat(fiveYearGrowth);
-          if (minGrowth === parseFloat(fiveYearGrowth)) {
+              ? Math.min(minGrowth, fiveYearGrowth)
+              : fiveYearGrowth;
+          if (minGrowth === fiveYearGrowth) {
             growthInterval = 5;
           }
         }
         if (threeYearGrowth) {
-          equityGrowthData.unshift(
-            `3Y: ${parseFloat(threeYearGrowth).toFixed(2)}`
-          );
+          equityGrowthData.unshift(`3Y: ${threeYearGrowth.toFixed(2)}`);
           minGrowth =
             minGrowth !== undefined
-              ? Math.min(minGrowth, parseFloat(threeYearGrowth))
-              : parseFloat(threeYearGrowth);
-          if (minGrowth === parseFloat(threeYearGrowth)) {
+              ? Math.min(minGrowth, threeYearGrowth)
+              : threeYearGrowth;
+          if (minGrowth === threeYearGrowth) {
             growthInterval = 3;
           }
         }
 
-        const valueEstimate = eps * this.props.minPE;
-        const valueInTenYears =
-          minGrowth > 0
-            ? valueEstimate * Math.pow(minGrowth, 10)
-            : valueEstimate * Math.pow(1.05, 10);
-        const stickerPrice = valueInTenYears / Math.pow(1.15, 10);
-        const myPrice = stickerPrice * 0.6;
+        if (this.props.minPE > 0 || eps > 0) {
+          // Don't want to show a number if both neg
+          const valueEstimate = eps * this.props.minPE;
+          const valueInTenYears =
+            minGrowth > 0
+              ? valueEstimate * Math.pow(1 + minGrowth, 10)
+              : valueEstimate * Math.pow(1.05, 10);
+          const stickerPrice = valueInTenYears / Math.pow(1.15, 10);
+          const myPrice = stickerPrice * 0.6;
 
-        if (price < myPrice) {
-          myAlert = (
-            <Alert variant="success">
-              My Number: ${Number.parseFloat(myPrice).toFixed(2)}
-            </Alert>
-          );
-        } else {
-          myAlert = (
-            <Alert variant="secondary">
-              My Number: ${Number.parseFloat(myPrice).toFixed(2)}
-            </Alert>
-          );
+          if (price < myPrice) {
+            myAlert = (
+              <Alert variant="success">
+                My Number: ${Number.parseFloat(myPrice).toFixed(2)}
+              </Alert>
+            );
+          } else {
+            myAlert = (
+              <Alert variant="secondary">
+                My Number: ${Number.parseFloat(myPrice).toFixed(2)}
+              </Alert>
+            );
+          }
         }
       }
 
@@ -123,36 +144,46 @@ class DisplayRecommendation extends React.Component {
             </div>
           ) : null}
           {myAlert !== null ? (
-            <div className="row justify-content-center mb-3 ">{myAlert}</div>
+            <>
+              <div className="row justify-content-center mb-3 ">{myAlert}</div>
+              <div className="row justify-content-center mb-3 text-center">
+                <Alert variant="secondary">
+                  <div>AverageEquityGrowthPerShare/year if positive</div>
+                  <div>Overall change if negative:</div>
+                  <pre>{JSON.stringify(equityGrowthData)}</pre>
+                  <pre>
+                    {JSON.stringify({
+                      minPE: this.props.minPE,
+                      eps: eps.toFixed(2),
+                    })}
+                  </pre>
+                </Alert>
+              </div>
+              {minGrowth <= 0 && (
+                <div className="row justify-content-center mb-3 ">
+                  <Alert variant="danger" className="text-center">
+                    <div>
+                      Due to negative EGPS. I am instead assuming 5% growth.
+                      Beware!
+                    </div>
+                  </Alert>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Popover id="popover-basic">
+                        Using the negative growth rate which happened in the
+                        last
+                        {" " + growthInterval} years could make My Number
+                        something like -3000.
+                      </Popover>
+                    }
+                  >
+                    <FontAwesomeIcon icon="question-circle" />
+                  </OverlayTrigger>
+                </div>
+              )}
+            </>
           ) : null}
-          {minGrowth <= 0 && (
-            <div className="row justify-content-center mb-3 ">
-              <Alert variant="danger" className="text-center">
-                <div>
-                  The company had negative shareholders equity growth per share
-                  in the
-                </div>
-                <div>
-                  last {growthInterval} years ({minGrowth.toFixed(2)}), which is
-                  not being not including in their price.
-                </div>
-                <div>Beware. I am instead assuming 5% company growth.</div>
-                <pre>Growth rates: {JSON.stringify(equityGrowthData)}</pre>
-              </Alert>
-              <OverlayTrigger
-                placement="top"
-                overlay={
-                  <Popover id="popover-basic">
-                    Using the negative growth could make My Number -3000 or
-                    something, which totally assumes the company will only do
-                    awful consitently.
-                  </Popover>
-                }
-              >
-                <FontAwesomeIcon icon="question-circle" />
-              </OverlayTrigger>
-            </div>
-          )}
         </React.Fragment>
       );
     } else {
