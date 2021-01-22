@@ -128,8 +128,13 @@ class DisplayRecommendation extends React.Component {
           {growth < 0 && (
             <div className="row justify-content-center mb-3 ">
               <Alert variant="danger">
-                The company had a negative growth in the last 10 years, which I
-                am not including in their price. Beware.
+                <div>
+                  The company had a negative shareholders equity growth in the
+                </div>
+                <div>
+                  last 10 years, which I am not including in their price.
+                  Beware.
+                </div>
               </Alert>
             </div>
           )}
