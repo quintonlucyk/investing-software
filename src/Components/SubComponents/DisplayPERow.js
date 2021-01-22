@@ -60,9 +60,9 @@ class DisplayPERow extends React.Component {
       fiveYearPE === "NA" ? "NA" : Number.parseFloat(fiveYearPE / 5).toFixed(2);
 
     const minPE = Math.min(
-      oneYearPE === "NA" ? Infinity : oneYearPE,
-      fiveYearPE === "NA" ? Infinity : fiveYearPE,
-      tenYearPE === "NA" ? Infinity : tenYearPE
+      oneYearPE === "NA" || isNaN(oneYearPE) ? Infinity : oneYearPE,
+      fiveYearPE === "NA" || isNaN(fiveYearPE) ? Infinity : fiveYearPE,
+      tenYearPE === "NA" || isNaN(tenYearPE) ? Infinity : tenYearPE
     );
     this.props.setMinPE(minPE);
 
@@ -103,11 +103,8 @@ class DisplayPERow extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  metrics: state.fetchedData.metrics
+const mapStateToProps = (state) => ({
+  metrics: state.fetchedData.metrics,
 });
 
-export default connect(
-  mapStateToProps,
-  { setMinPE }
-)(DisplayPERow);
+export default connect(mapStateToProps, { setMinPE })(DisplayPERow);
