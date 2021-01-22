@@ -51,7 +51,7 @@ class DisplayRecommendation extends React.Component {
         this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
       ) {
         const eps = parseFloat(this.props.income.financials[0].EPS);
-        let growth;
+        var growth;
         if (
           this.props.growth.growth[0][
             "10Y Shareholders Equity Growth (per Share)"
@@ -88,10 +88,13 @@ class DisplayRecommendation extends React.Component {
             )
           );
         }
-        const minPE = Math.min(
-          parseFloat(this.props.minPE),
-          parseFloat(growth * 100 * 2)
-        );
+        const minPE =
+          growth > 0
+            ? Math.min(
+                parseFloat(this.props.minPE),
+                parseFloat(growth * 100 * 2)
+              )
+            : parseFloat(this.props.minPE);
 
         const futureEPS = eps * 3.056;
         const futureStockPrice = futureEPS * minPE;
@@ -122,6 +125,14 @@ class DisplayRecommendation extends React.Component {
           {myAlert !== null ? (
             <div className="row justify-content-center mb-3 ">{myAlert}</div>
           ) : null}
+          {growth < 0 && (
+            <div className="row justify-content-center mb-3 ">
+              <Alert variant="danger">
+                The company had a negative growth in the last 10 years, which I
+                am not including in their price. Beware.
+              </Alert>
+            </div>
+          )}
         </React.Fragment>
       );
     } else {
