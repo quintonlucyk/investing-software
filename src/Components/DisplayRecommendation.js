@@ -132,8 +132,8 @@ class DisplayRecommendation extends React.Component {
                   The company had a negative shareholders equity growth in the
                 </div>
                 <div>
-                  last 10 years, which I am not including in their price.
-                  Beware.
+                  last 10 years ({growth.toFixed(2)}), which I am not including
+                  in their price. Beware.
                 </div>
               </Alert>
             </div>
