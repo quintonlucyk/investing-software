@@ -1,5 +1,6 @@
 import React from "react";
-import Alert from "react-bootstrap/Alert";
+import { Alert, OverlayTrigger, Popover } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
 class DisplayRecommendation extends React.Component {
@@ -41,7 +42,7 @@ class DisplayRecommendation extends React.Component {
         }
       }
       let myAlert = null;
-      var growth = undefined;
+      var minGrowth = undefined;
       var growthInterval = undefined;
       if (
         this.props.income.financials[0] &&
@@ -49,92 +50,56 @@ class DisplayRecommendation extends React.Component {
         this.props.growth.growth[0]
       ) {
         const eps = parseFloat(this.props.income.financials[0].EPS);
-        if (
-          this.props.growth.growth[0][
-            "10Y Shareholders Equity Growth (per Share)"
-          ]
-        ) {
-          growth = parseFloat(
-            this.props.growth.growth[0][
-              "10Y Shareholders Equity Growth (per Share)"
-            ]
+        const tenYearGrowth = this.props.growth.growth[0][
+          "10Y Shareholders Equity Growth (per Share)"
+        ];
+        const fiveYearGrowth = this.props.growth.growth[0][
+          "5Y Shareholders Equity Growth (per Share)"
+        ];
+        const threeYearGrowth = this.props.growth.growth[0][
+          "3Y Shareholders Equity Growth (per Share)"
+        ];
+        var equityGrowthData = [];
+        if (tenYearGrowth) {
+          equityGrowthData.unshift(
+            `10Y: ${parseFloat(tenYearGrowth).toFixed(2)}`
           );
+          minGrowth = parseFloat(tenYearGrowth);
           growthInterval = 10;
         }
-        if (
-          this.props.growth.growth[0][
-            "5Y Shareholders Equity Growth (per Share)"
-          ]
-        ) {
-          growth =
-            growth !== undefined
-              ? Math.min(
-                  growth,
-                  parseFloat(
-                    this.props.growth.growth[0][
-                      "5Y Shareholders Equity Growth (per Share)"
-                    ]
-                  )
-                )
-              : parseFloat(
-                  this.props.growth.growth[0][
-                    "5Y Shareholders Equity Growth (per Share)"
-                  ]
-                );
-          if (
-            growth ===
-            parseFloat(
-              this.props.growth.growth[0][
-                "5Y Shareholders Equity Growth (per Share)"
-              ]
-            )
-          ) {
+        if (fiveYearGrowth) {
+          equityGrowthData.unshift(
+            `5Y: ${parseFloat(fiveYearGrowth).toFixed(2)}`
+          );
+          minGrowth =
+            minGrowth !== undefined
+              ? Math.min(minGrowth, parseFloat(fiveYearGrowth))
+              : parseFloat(fiveYearGrowth);
+          if (minGrowth === parseFloat(fiveYearGrowth)) {
             growthInterval = 5;
           }
         }
-        if (
-          this.props.growth.growth[0][
-            "3Y Shareholders Equity Growth (per Share)"
-          ]
-        ) {
-          growth =
-            growth !== undefined
-              ? Math.min(
-                  growth,
-                  parseFloat(
-                    this.props.growth.growth[0][
-                      "3Y Shareholders Equity Growth (per Share)"
-                    ]
-                  )
-                )
-              : parseFloat(
-                  this.props.growth.growth[0][
-                    "3Y Shareholders Equity Growth (per Share)"
-                  ]
-                );
-          if (
-            growth ===
-            parseFloat(
-              this.props.growth.growth[0][
-                "3Y Shareholders Equity Growth (per Share)"
-              ]
-            )
-          ) {
+        if (threeYearGrowth) {
+          equityGrowthData.unshift(
+            `3Y: ${parseFloat(threeYearGrowth).toFixed(2)}`
+          );
+          minGrowth =
+            minGrowth !== undefined
+              ? Math.min(minGrowth, parseFloat(threeYearGrowth))
+              : parseFloat(threeYearGrowth);
+          if (minGrowth === parseFloat(threeYearGrowth)) {
             growthInterval = 3;
           }
         }
-        const minPE =
-          growth > 0
-            ? Math.min(
-                parseFloat(this.props.minPE),
-                parseFloat(growth * 100 * 2)
-              )
-            : parseFloat(this.props.minPE);
 
-        const futureEPS = eps * 3.056;
-        const futureStockPrice = futureEPS * minPE;
-        const stickerPrice = futureStockPrice / 4;
+        const valueEstimate = eps * this.props.minPE;
+        const valueInTenYears =
+          minGrowth > 0
+            ? valueEstimate * Math.pow(minGrowth, 10)
+            : valueEstimate * Math.pow(1.05, 10);
+        const stickerPrice = valueInTenYears / Math.pow(1.15, 10);
         const myPrice = stickerPrice * 0.6;
+
         if (price < myPrice) {
           myAlert = (
             <Alert variant="success">
@@ -160,20 +125,32 @@ class DisplayRecommendation extends React.Component {
           {myAlert !== null ? (
             <div className="row justify-content-center mb-3 ">{myAlert}</div>
           ) : null}
-          {growth < 0 && (
+          {minGrowth <= 0 && (
             <div className="row justify-content-center mb-3 ">
-              <Alert variant="danger">
+              <Alert variant="danger" className="text-center">
                 <div>
-                  The company had a negative shareholders equity growth in the
+                  The company had negative shareholders equity growth per share
+                  in the
                 </div>
                 <div>
-                  last {growthInterval} years ({growth.toFixed(2)}), which I am
-                  not including in their price. Beware.
+                  last {growthInterval} years ({minGrowth.toFixed(2)}), which is
+                  not being not including in their price.
                 </div>
-                <div>
-                  My Number is now a result of their minPE instead of growth.
-                </div>
+                <div>Beware. I am instead assuming 5% company growth.</div>
+                <pre>Growth rates: {JSON.stringify(equityGrowthData)}</pre>
               </Alert>
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Popover id="popover-basic">
+                    Using the negative growth could make My Number -3000 or
+                    something, which totally assumes the company will only do
+                    awful consitently.
+                  </Popover>
+                }
+              >
+                <FontAwesomeIcon icon="question-circle" />
+              </OverlayTrigger>
             </div>
           )}
         </React.Fragment>
