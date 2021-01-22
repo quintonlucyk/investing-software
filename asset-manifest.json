@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/investing-software/static/css/main.c23ba020.chunk.css",
-    "main.js": "/investing-software/static/js/main.c65f709d.chunk.js",
-    "main.js.map": "/investing-software/static/js/main.c65f709d.chunk.js.map",
+    "main.js": "/investing-software/static/js/main.e50b076a.chunk.js",
+    "main.js.map": "/investing-software/static/js/main.e50b076a.chunk.js.map",
     "runtime-main.js": "/investing-software/static/js/runtime-main.6b278c7e.js",
     "runtime-main.js.map": "/investing-software/static/js/runtime-main.6b278c7e.js.map",
     "static/js/2.5adb261b.chunk.js": "/investing-software/static/js/2.5adb261b.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.6b278c7e.js",
     "static/js/2.5adb261b.chunk.js",
     "static/css/main.c23ba020.chunk.css",
-    "static/js/main.c65f709d.chunk.js"
+    "static/js/main.e50b076a.chunk.js"
   ]
 }
