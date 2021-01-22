@@ -41,52 +41,87 @@ class DisplayRecommendation extends React.Component {
         }
       }
       let myAlert = null;
+      var growth = undefined;
+      var growthInterval = undefined;
       if (
         this.props.income.financials[0] &&
         this.props.income.financials[0].EPS &&
-        this.props.growth.growth[0] &&
-        this.props.growth.growth[0][
-          "5Y Shareholders Equity Growth (per Share)"
-        ] &&
-        this.props.growth.growth[0]["3Y Shareholders Equity Growth (per Share)"]
+        this.props.growth.growth[0]
       ) {
         const eps = parseFloat(this.props.income.financials[0].EPS);
-        var growth;
         if (
           this.props.growth.growth[0][
             "10Y Shareholders Equity Growth (per Share)"
           ]
         ) {
-          growth = Math.min(
-            parseFloat(
-              this.props.growth.growth[0][
-                "10Y Shareholders Equity Growth (per Share)"
-              ]
-            ),
+          growth = parseFloat(
+            this.props.growth.growth[0][
+              "10Y Shareholders Equity Growth (per Share)"
+            ]
+          );
+          growthInterval = 10;
+        }
+        if (
+          this.props.growth.growth[0][
+            "5Y Shareholders Equity Growth (per Share)"
+          ]
+        ) {
+          growth =
+            growth !== undefined
+              ? Math.min(
+                  growth,
+                  parseFloat(
+                    this.props.growth.growth[0][
+                      "5Y Shareholders Equity Growth (per Share)"
+                    ]
+                  )
+                )
+              : parseFloat(
+                  this.props.growth.growth[0][
+                    "5Y Shareholders Equity Growth (per Share)"
+                  ]
+                );
+          if (
+            growth ===
             parseFloat(
               this.props.growth.growth[0][
                 "5Y Shareholders Equity Growth (per Share)"
               ]
-            ),
+            )
+          ) {
+            growthInterval = 5;
+          }
+        }
+        if (
+          this.props.growth.growth[0][
+            "3Y Shareholders Equity Growth (per Share)"
+          ]
+        ) {
+          growth =
+            growth !== undefined
+              ? Math.min(
+                  growth,
+                  parseFloat(
+                    this.props.growth.growth[0][
+                      "3Y Shareholders Equity Growth (per Share)"
+                    ]
+                  )
+                )
+              : parseFloat(
+                  this.props.growth.growth[0][
+                    "3Y Shareholders Equity Growth (per Share)"
+                  ]
+                );
+          if (
+            growth ===
             parseFloat(
               this.props.growth.growth[0][
                 "3Y Shareholders Equity Growth (per Share)"
               ]
             )
-          );
-        } else {
-          growth = Math.min(
-            parseFloat(
-              this.props.growth.growth[0][
-                "5Y Shareholders Equity Growth (per Share)"
-              ]
-            ),
-            parseFloat(
-              this.props.growth.growth[0][
-                "3Y Shareholders Equity Growth (per Share)"
-              ]
-            )
-          );
+          ) {
+            growthInterval = 3;
+          }
         }
         const minPE =
           growth > 0
@@ -132,8 +167,11 @@ class DisplayRecommendation extends React.Component {
                   The company had a negative shareholders equity growth in the
                 </div>
                 <div>
-                  last 10 years ({growth.toFixed(2)}), which I am not including
-                  in their price. Beware.
+                  last {growthInterval} years ({growth.toFixed(2)}), which I am
+                  not including in their price. Beware.
+                </div>
+                <div>
+                  My Number is now a result of their minPE instead of growth.
                 </div>
               </Alert>
             </div>
