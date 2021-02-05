@@ -55,15 +55,13 @@ class DisplayImportantStats extends React.Component {
     if (tangibleBookValueForCommoners > 1e8) {
       tangibleBVDisplay = (
         <Alert variant="secondary">
-          Tangible BV (100M): $
-          {(tangibleBookValueForCommoners / 1e8).toFixed(2)}
+          Tangible BV (M): ${(tangibleBookValueForCommoners / 1e6).toFixed(2)}
         </Alert>
       );
     } else {
       tangibleBVDisplay = (
         <Alert variant="danger">
-          Tangible BV (100M): $
-          {(tangibleBookValueForCommoners / 1e8).toFixed(2)}
+          Tangible BV (M): ${(tangibleBookValueForCommoners / 1e6).toFixed(2)}
         </Alert>
       );
     }
