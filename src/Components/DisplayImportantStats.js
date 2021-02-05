@@ -1,16 +1,10 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
 class DisplayImportantStats extends React.Component {
   render() {
-    console.log(this.props.metrics);
-    console.log(this.props.statistics);
-    if (
-      this.props.metrics?.metrics == null ||
-      this.props.statistics?.defaultKeyStatistics == null
-    ) {
+    if (this.props.statistics?.defaultKeyStatistics == null) {
       return null;
     }
 
@@ -23,19 +17,9 @@ class DisplayImportantStats extends React.Component {
     let sharesOutstandingRaw = this.props.statistics.defaultKeyStatistics
       .sharesOutstanding?.raw;
 
-    let tangibleBookValuePerShare = parseFloat(
-      this.props.metrics?.metrics[0]["Tangible Book Value per Share"]
-    );
-
-    let heldOutsiders = 1 - heldInsideRaw;
-
     let floatOverOutstanding = floatSharesRaw / sharesOutstandingRaw;
 
-    let tangibleBookValueForCommoners =
-      tangibleBookValuePerShare * heldOutsiders * floatSharesRaw;
-
     let heldCommonDisplay = null;
-    let tangibleBVDisplay = null;
     let floatOverDisplay = null;
 
     if (heldInsideRaw < 0.2) {
@@ -48,20 +32,6 @@ class DisplayImportantStats extends React.Component {
       heldCommonDisplay = (
         <Alert variant="danger">
           % Held By Insiders: {(heldInsideRaw * 100).toFixed(2)}
-        </Alert>
-      );
-    }
-
-    if (tangibleBookValueForCommoners > 1e8) {
-      tangibleBVDisplay = (
-        <Alert variant="secondary">
-          Tangible BV (M): ${(tangibleBookValueForCommoners / 1e6).toFixed(2)}
-        </Alert>
-      );
-    } else {
-      tangibleBVDisplay = (
-        <Alert variant="danger">
-          Tangible BV (M): ${(tangibleBookValueForCommoners / 1e6).toFixed(2)}
         </Alert>
       );
     }
@@ -86,9 +56,6 @@ class DisplayImportantStats extends React.Component {
           {heldCommonDisplay}
         </div>
         <div className="row justify-content-center mb-3 ">
-          {tangibleBVDisplay}
-        </div>
-        <div className="row justify-content-center mb-3 ">
           {floatOverDisplay}
         </div>
       </>
@@ -97,7 +64,6 @@ class DisplayImportantStats extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  metrics: state.fetchedData.metrics,
   statistics: state.fetchedData.statistics,
 });
 
