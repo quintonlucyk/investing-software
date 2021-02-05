@@ -29,25 +29,25 @@ class DisplayImportantStats extends React.Component {
 
     let heldOutsiders = 1 - heldInsideRaw;
 
-    let heldByCommoners =
-      (floatSharesRaw / sharesOutstandingRaw) * heldOutsiders;
+    let floatOverOutstanding = floatSharesRaw / sharesOutstandingRaw;
 
     let tangibleBookValueForCommoners =
       tangibleBookValuePerShare * heldOutsiders * floatSharesRaw;
 
     let heldCommonDisplay = null;
     let tangibleBVDisplay = null;
+    let floatOverDisplay = null;
 
-    if (heldByCommoners > 0.8) {
+    if (heldInsideRaw < 0.2) {
       heldCommonDisplay = (
         <Alert variant="secondary">
-          % held By Commoners: {(heldByCommoners * 100).toFixed(2)}
+          % Held By Insiders: {(heldInsideRaw * 100).toFixed(2)}
         </Alert>
       );
     } else {
       heldCommonDisplay = (
         <Alert variant="danger">
-          % held By Commoners: {(heldByCommoners * 100).toFixed(2)}
+          % Held By Insiders: {(heldInsideRaw * 100).toFixed(2)}
         </Alert>
       );
     }
@@ -68,6 +68,20 @@ class DisplayImportantStats extends React.Component {
       );
     }
 
+    if (floatOverOutstanding > 0.8) {
+      floatOverDisplay = (
+        <Alert variant="secondary">
+          % Float / Shares Out.: {(floatOverOutstanding * 100).toFixed(2)}
+        </Alert>
+      );
+    } else {
+      floatOverDisplay = (
+        <Alert variant="danger">
+          % Float / Shares Out.: {(floatOverOutstanding * 100).toFixed(2)}
+        </Alert>
+      );
+    }
+
     return (
       <>
         <div className="row justify-content-center mb-3 ">
@@ -75,6 +89,9 @@ class DisplayImportantStats extends React.Component {
         </div>
         <div className="row justify-content-center mb-3 ">
           {tangibleBVDisplay}
+        </div>
+        <div className="row justify-content-center mb-3 ">
+          {floatOverDisplay}
         </div>
       </>
     );
