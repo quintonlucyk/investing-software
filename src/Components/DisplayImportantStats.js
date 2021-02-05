@@ -41,13 +41,13 @@ class DisplayImportantStats extends React.Component {
     if (heldByCommoners > 0.8) {
       heldCommonDisplay = (
         <Alert variant="secondary">
-          % By Commoners: {(heldByCommoners * 100).toFixed(2)}
+          % held By Commoners: {(heldByCommoners * 100).toFixed(2)}
         </Alert>
       );
     } else {
       heldCommonDisplay = (
         <Alert variant="danger">
-          % By Commoners: {(heldByCommoners * 100).toFixed(2)}
+          % held By Commoners: {(heldByCommoners * 100).toFixed(2)}
         </Alert>
       );
     }
