@@ -14,6 +14,8 @@ import {
   //   historicalPriceCall,
 } from "../APICalls/FinancialModellingPrep";
 
+import { statisticsCall } from "../APICalls/yFinance";
+
 // import { historicalAdjustedCall } from "../APICalls/AlphaVantage";
 
 const fetchDataError = () => {
@@ -38,6 +40,7 @@ export const fetchData = (symbol) => async (dispatch) => {
   const income = await incomeCall(symbol);
   const cash = await cashCall(symbol);
   const growth = await growthCall(symbol);
+  const statistics = await statisticsCall(symbol);
   //   const historicalPrice = await historicalPriceCall(symbol);
   //   const historicalAdjusted = await historicalAdjustedCall(symbol);
 
@@ -50,6 +53,7 @@ export const fetchData = (symbol) => async (dispatch) => {
         income,
         cash,
         growth,
+        statistics,
         // historicalPrice,
         // historicalAdjusted,
       })

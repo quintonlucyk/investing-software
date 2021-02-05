@@ -13,6 +13,7 @@ import DisplayProfileData from "../Components/DisplayProfileData";
 import DisplayMyTableData from "../Components/DisplayMyTableData";
 import DisplayEllenTableData from "../Components/DisplayEllenTableData";
 import DisplayPicks from "../Components/DisplayPicks";
+import DisplayImportantStats from "../Components/DisplayImportantStats";
 import DisplayRecommendation from "../Components/DisplayRecommendation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
@@ -100,6 +101,7 @@ class Main extends React.Component {
                 <DisplayMyTableData />
               </div>
             </div>
+            <DisplayImportantStats />
             <DisplayRecommendation />
           </Tab>
           <Tab eventKey="2" title="Picks">

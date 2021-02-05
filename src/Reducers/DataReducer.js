@@ -13,6 +13,7 @@ const initialState = {
   income: null,
   cash: null,
   growth: null,
+  statistics: null,
   historicalPrice: null,
   historicalAdjusted: null,
 };
